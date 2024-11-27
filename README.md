@@ -5,14 +5,12 @@
 ├── src
 │   ├── app // app 폴더 하위에는 라우팅 관련 페이지가 들어가며 폴더를 생성하는 기준으로 라우팅합니다.
 │   │   ├── layout.tsx // root layout
-│   │   ├── page.module.scss
 │   │   ├── page.tsx
 │   │   └── test // app 폴더 하위의 폴더(ex.test)는 네이밍 기준으로 구조화가 가능합니다.
 │   │       ├── _components // private folders: _ (언더바) - 라우팅과 관련이 없다고 명시해주는 기능입니다.
 │   │       │   └── Input.tsx
 │   │       ├── _queries
 │   │       ├── page.tsx
-│   │       └── test.module.scss
 │   └── shared // 여러 페이지에 공통으로 쓰이는 요소들이 들어갑니다.
 │       ├── assets
 │       │   ├── Svg.tsx
