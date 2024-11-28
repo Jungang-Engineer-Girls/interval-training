@@ -3,6 +3,7 @@
 ```
 ├── public
 ├── src
+│   ├── api // app 폴더 하위의 도메인들과 같이 네이밍합니다.
 │   ├── app // app 폴더 하위에는 라우팅 관련 페이지가 들어가며 폴더를 생성하는 기준으로 라우팅합니다.
 │   │   ├── layout.tsx // root layout
 │   │   ├── page.tsx

@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "moduleResolution": "node", // 모듈 해석 전략 (node 스타일)
+    "esModuleInterop": true, // CommonJS와 ES 모듈 간 호환성 개선
+    "resolveJsonModule": true, // JSON 파일 임포트 허용
+    "jsxImportSource": "@emotion/react",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "noEmit": true,
-    "esModuleInterop": true,
+
+    /* Bundler mode */
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
+
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -18,9 +20,18 @@
         "name": "next"
       }
     ],
+    "types": ["@emotion/react/types/css-prop"],
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    /* Paths */
+    "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "target": "ES2017"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
