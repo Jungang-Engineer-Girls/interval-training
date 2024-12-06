@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase/client";
+import { supabase } from "@/supabase/client";
 
 export default async function handler() {
   const { data: user, error } = await supabase.from("user").select("name");

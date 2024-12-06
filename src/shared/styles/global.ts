@@ -160,6 +160,7 @@ export const globalStyles = css`
   * {
     box-sizing: border-box !important;
     margin: 0;
+
     padding: 0;
 
     font-family: inherit;
@@ -167,5 +168,19 @@ export const globalStyles = css`
     word-wrap: break-word;
 
     -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #e1eaff;
+    min-height: 568px;
+    height: 100vh;
+  }
+
+  main {
+    background-color: #ffffff;
+    width: 320px;
+    min-height: 568px;
+    height: 100vh;
+    margin: 0 auto;
   }
 `;

@@ -120,18 +120,11 @@ const size = {
 };
 
 const deviceSizes = {
-  small: 431,
-  medium: 769,
-  large: 1025,
-  xlarge: 1025,
+  small: 320,
 };
 
 const device = {
   small: `screen and (max-width: ${deviceSizes.small}px)`,
-  medium: `screen and (max-width: ${deviceSizes.medium}px)`,
-  large: `screen and (max-width: ${deviceSizes.large}px)`,
-  minMedium: `screen and (min-width: ${deviceSizes.medium + 1}px)`, // 769px 이상
-  minLarge: `screen and (min-width: ${deviceSizes.large + 1}px)`, // 1025px 이상
 };
 
 const calculatePcVw = (width: number) => {
