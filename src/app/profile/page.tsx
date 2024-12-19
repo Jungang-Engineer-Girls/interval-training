@@ -6,6 +6,10 @@ import { globalStyles } from '@/shared/styles/global';
 import styled from '@emotion/styled';
 
 import Nickname from '@/shared/components/profile-step/nickname';
+import BodyInfo from '@/shared/components/profile-step/bodyInfo';
+import BmiResult from '@/shared/components/profile-step/bmiResult';
+import GoalWeight from '@/shared/components/profile-step/goalWeight';
+import Start from '@/shared/components/profile-step/start';
 export default function ProfilePage() {
   const queryClient = new QueryClient();
 
