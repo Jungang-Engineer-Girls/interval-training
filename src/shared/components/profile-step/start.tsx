@@ -2,6 +2,8 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
+
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 export default function Start() {
   return (
     <>
@@ -9,6 +11,7 @@ export default function Start() {
         <div>자 이제 운동을 </div>
         <div>시작해볼까요?</div>
       </Header>
+      <DotLottieReact src='https://lottie.host/d68bf360-518c-4159-affc-21fe973cfd73/1Jq4dn6dE2.lottie' loop autoplay />
 
       <ButtonWrapper>
         <Button $width={100} $height={20} $fontSize={12} $variant='mint'>

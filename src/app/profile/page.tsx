@@ -17,7 +17,7 @@ export default function ProfilePage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <Section>
-        <Nickname />
+        <Start />
       </Section>
     </HydrationBoundary>
   );
