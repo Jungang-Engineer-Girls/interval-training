@@ -7,6 +7,8 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Button from "@/shared/components/buttons/button";
+import Loading from "@/shared/components/loading/loading";
+
 export default function TestPage() {
   const queryClient = new QueryClient();
 
@@ -14,6 +16,7 @@ export default function TestPage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <section>
         <div>test page</div>
+        <Loading />
         <Button $width={100} $height={20} $fontSize={12} $variant="primary">
           버튼
         </Button>
