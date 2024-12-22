@@ -7,11 +7,15 @@ module.exports = {
     "@typescript-eslint",
     // "simple-import-sort",
     "react-refresh",
-    "prettier",
+    // "prettier",
     "react",
     "import",
   ],
-  extends: ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
+  extends: [
+    "next",
+    "next/core-web-vitals",
+    // "plugin:prettier/recommended"
+  ],
   settings: {
     "import/resolver": "node",
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
@@ -94,7 +98,7 @@ module.exports = {
         format: ["PascalCase"],
       },
     ],
-    "prettier/prettier": ["error"],
+    // "prettier/prettier": ["error"],
   },
   overrides: [
     {
