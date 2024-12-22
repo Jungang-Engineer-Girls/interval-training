@@ -1,3 +1,5 @@
+"use client";
+
 import Lottie from "lottie-react";
 import animationData from "@/shared/assets/icons/loading.json";
 
