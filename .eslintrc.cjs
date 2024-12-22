@@ -6,7 +6,7 @@ module.exports = {
   plugins: [
     "@typescript-eslint",
     // "simple-import-sort",
-    "react-refresh",
+    // "react-refresh",
     "prettier",
     "react",
     "import",
