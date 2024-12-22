@@ -2,7 +2,12 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
-export default function BmiResult() {
+
+type StepProps = {
+  onNext: () => void;
+};
+
+export default function BmiResult({ onNext }: StepProps) {
   return (
     <>
       <Header>
@@ -15,7 +20,7 @@ export default function BmiResult() {
       <div>체중 그래프</div>
 
       <ButtonWrapper>
-        <Button $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
           알겠어요
         </Button>
       </ButtonWrapper>

@@ -2,7 +2,12 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
-export default function GoalWeight() {
+
+type StepProps = {
+  onNext: () => void;
+};
+
+export default function GoalWeight({ onNext }: StepProps) {
   return (
     <>
       <Header>
@@ -17,7 +22,7 @@ export default function GoalWeight() {
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
           등록하기
         </Button>
       </ButtonWrapper>

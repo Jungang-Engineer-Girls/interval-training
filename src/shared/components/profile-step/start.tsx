@@ -4,7 +4,12 @@ import styled from '@emotion/styled';
 import Button from '@/shared/components/buttons/button';
 
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-export default function Start() {
+
+type StepProps = {
+  onNext: () => void;
+};
+
+export default function Start({ onNext }: StepProps) {
   return (
     <>
       <Header>
@@ -14,7 +19,7 @@ export default function Start() {
       <DotLottieReact src='https://lottie.host/d68bf360-518c-4159-affc-21fe973cfd73/1Jq4dn6dE2.lottie' loop autoplay />
 
       <ButtonWrapper>
-        <Button $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
           시작하기
         </Button>
       </ButtonWrapper>
