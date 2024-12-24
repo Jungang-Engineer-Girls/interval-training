@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
-import theme from "./theme";
+import theme from './theme';
 
 const resetCss = css`
   html,
@@ -155,6 +155,7 @@ export const globalStyles = css`
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     color: ${theme.colors.black};
     background-color: ${theme.colors.white};
+   
   }
 
   * {
@@ -172,14 +173,14 @@ export const globalStyles = css`
 
   body {
     background-color: #e1eaff;
-    min-height: 568px;
+     min-height: calc(var(--vh, 1) * 100);//모바일
     height: 100vh;
   }
 
   main {
     background-color: #ffffff;
     width: 320px;
-    min-height: 568px;
+    min-height: calc(var(--vh, 1) * 100);//모바일
     height: 100vh;
     margin: 0 auto;
   }
