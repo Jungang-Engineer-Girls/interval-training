@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 export default function Home() {
   const queryClient = new QueryClient();
 
-  // 모바일 뷰포트 높이이
+  // 모바일 뷰포트 높이
   useEffect(() => {
     const setVh = () => {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);

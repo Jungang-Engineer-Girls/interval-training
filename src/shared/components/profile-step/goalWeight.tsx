@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Button from '@/shared/components/buttons/button';
 
 type StepProps = {
-  onNext: () => void;
+  onNext: (data: any) => void;
 };
 
 export default function GoalWeight({ onNext }: StepProps) {
