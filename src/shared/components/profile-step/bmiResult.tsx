@@ -20,7 +20,7 @@ export default function BmiResult({ onNext }: StepProps) {
       <div>체중 그래프</div>
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
           알겠어요
         </Button>
       </ButtonWrapper>

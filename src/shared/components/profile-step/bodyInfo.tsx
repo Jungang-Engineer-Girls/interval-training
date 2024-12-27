@@ -25,7 +25,7 @@ export default function BodyInfo({ onNext }: StepProps) {
         </div>
       </InputWrapper>
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
           등록하기
         </Button>
       </ButtonWrapper>

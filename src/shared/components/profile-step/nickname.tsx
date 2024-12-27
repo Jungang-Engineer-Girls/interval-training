@@ -20,7 +20,7 @@ export default function Nickname({ onNext }: StepProps) {
         <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
           등록하기
         </Button>
-        <Button $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button $width={100} $height={20} $fontSize={12} $variant='blue'>
           건너뛰기
         </Button>
       </ButtonWrapper>

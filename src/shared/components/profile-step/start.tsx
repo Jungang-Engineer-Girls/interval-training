@@ -20,7 +20,7 @@ export default function Start({ onNext }: StepProps) {
       </ImageWrapper>
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
           시작하기
         </Button>
       </ButtonWrapper>
