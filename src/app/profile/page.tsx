@@ -24,6 +24,9 @@ export default function ProfilePage() {
   const onNext = () => {
     setStep((prev) => (prev + 1 < steps.length ? prev + 1 : prev));
   };
+  const onSkip = () => {
+    setStep((prev) => Math.min(prev + 3, steps.length - 1));
+  };
 
   // const onPrev = () => {
   //   setStep((prev) => prev - 1);
@@ -53,7 +56,7 @@ export default function ProfilePage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <Section>
-        {steps[step] === 'Nickname' && <Nickname onNext={onNext} />}
+        {steps[step] === 'Nickname' && <Nickname onNext={onNext} onSkip={onSkip} />}
         {steps[step] === 'BodyInfo' && <BodyInfo onNext={onNext} />}
         {steps[step] === 'BmiResult' && <BmiResult onNext={onNext} />}
         {steps[step] === 'GoalWeight' && (

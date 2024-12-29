@@ -5,9 +5,10 @@ import Button from '@/shared/components/buttons/button';
 
 type StepProps = {
   onNext: () => void;
+  onSkip: () => void;
 };
 
-export default function Nickname({ onNext }: StepProps) {
+export default function Nickname({ onNext, onSkip }: StepProps) {
   return (
     <>
       <Header>
@@ -20,7 +21,7 @@ export default function Nickname({ onNext }: StepProps) {
         <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
           등록하기
         </Button>
-        <Button $width={100} $height={20} $fontSize={12} $variant='blue'>
+        <Button onClick={onSkip} $width={100} $height={20} $fontSize={12} $variant='blue'>
           건너뛰기
         </Button>
       </ButtonWrapper>
