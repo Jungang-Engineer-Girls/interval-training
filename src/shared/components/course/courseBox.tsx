@@ -28,12 +28,13 @@ const Box = styled.button<Props>`
   width: ${({ $width }) => `clamp(fit-content, $width, ${$width});`};
   height: height;
   padding: 12px 24px;
+  border-radius:20px;
 
   font-family: NanumSquareNeo-Bold, sans-serif;
   font-size: ${({ $fontSize }) => `clamp(8px, ${$fontSize}px, ${$fontSize}px)`};
+    font-weight: 600;
 
   border: none;
-  border-radius: 54px;
 
   ${({ $variant }) => {
     switch ($variant) {
@@ -74,7 +75,7 @@ const Box = styled.button<Props>`
       case 'mint': {
         return `
           background-color: ${theme.colors.mint_2};
-          color: ${theme.colors.blue_2};
+          color: 'black';
           border: 1px solid ${theme.colors.mint_2};
         `;
       }
