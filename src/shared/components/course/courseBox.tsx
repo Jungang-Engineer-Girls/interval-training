@@ -8,14 +8,19 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $height: number;
   $fontSize: number;
   $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
+  icon?: React.ReactNode;
   children?: React.ReactNode;
 }
 
-export default function CourseBox({ $width, $height, $fontSize, $variant, children, ...rest }: Props) {
+export default function CourseBox({ $width, $height, $fontSize, $variant, icon, children, ...rest }: Props) {
   return (
     <>
       <Box $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
-        <span>{children}</span>
+        <ContentWrapper>
+          {' '}
+          {icon && <IconWrapper>{icon}</IconWrapper>}
+          <span>{children}</span>
+        </ContentWrapper>
       </Box>
     </>
   );
@@ -106,4 +111,23 @@ const Box = styled.button<Props>`
       }
     }
   }}
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  align-items: center; 
+`;
+
+const IconWrapper = styled.span`
+  width: 55px; 
+  height: 55px;
+  border-radius: 50%; 
+  background-color: #f0f0f0; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  img {
+    width: 24px; 
+    height: 24px;
+  }
 `;

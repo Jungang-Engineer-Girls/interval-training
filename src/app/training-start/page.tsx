@@ -4,15 +4,16 @@ import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
 import { globalStyles } from '@/shared/styles/global';
 import CourseBox from '@/shared/components/course/courseBox';
+import running from '@/shared/assets/icons/running.svg';
 
 export default function TrainingStart() {
   const queryClient = new QueryClient();
+  console.log('running', running);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <Container>
-        {' '}
-        <CourseBox $width={263} $height={121} $fontSize={20} $variant='blue'>
+        <CourseBox $width={263} $height={121} $fontSize={20} $variant='blue' icon={<img src={running.src} alt='Running Icon' style={{ width: '24px', height: '24px' }} />}>
           인터벌트레이닝 바로 시작하기
         </CourseBox>
         <BoxWrapper>
