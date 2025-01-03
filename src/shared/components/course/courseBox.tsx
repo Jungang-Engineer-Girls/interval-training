@@ -8,17 +8,22 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $height: number;
   $fontSize: number;
   $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
-  icon?: React.ReactNode;
+  icon?: string;
+  iconBgColor?: string;
+  iconSize?: number;
   children?: React.ReactNode;
 }
 
-export default function CourseBox({ $width, $height, $fontSize, $variant, icon, children, ...rest }: Props) {
+export default function CourseBox({ $width, $height, $fontSize, $variant, icon, iconBgColor, iconSize = 24, children, ...rest }: Props) {
   return (
     <>
       <Box $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
         <ContentWrapper>
-          {' '}
-          {icon && <IconWrapper>{icon}</IconWrapper>}
+          {icon && (
+            <IconWrapper $iconBgColor={iconBgColor} $iconSize={iconSize}>
+              <img src={icon} alt='Icon' />
+            </IconWrapper>
+          )}
           <span>{children}</span>
         </ContentWrapper>
       </Box>
@@ -28,7 +33,6 @@ export default function CourseBox({ $width, $height, $fontSize, $variant, icon, 
 
 const Box = styled.button<Props>`
   cursor: pointer;
-
   box-sizing: border-box;
   width: ${({ $width }) => `clamp(fit-content, $width, ${$width});`};
   height: height;
@@ -118,16 +122,17 @@ const ContentWrapper = styled.div`
   align-items: center; 
 `;
 
-const IconWrapper = styled.span`
-  width: 55px; 
-  height: 55px;
+const IconWrapper = styled.span<{ $iconBgColor?: string; $iconSize?: number }>`
+  width: ${({ $iconSize }) => `${$iconSize}px`};
+  height: ${({ $iconSize }) => `${$iconSize}px`};
   border-radius: 50%; 
-  background-color: #f0f0f0; 
+  background-color: ${({ $iconBgColor }) => $iconBgColor || 'white'}; 
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
+
   img {
-    width: 24px; 
-    height: 24px;
+    width: 70%; 
+    height: 70%;
   }
 `;
