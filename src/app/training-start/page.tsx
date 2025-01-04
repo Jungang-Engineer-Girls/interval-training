@@ -10,7 +10,7 @@ import my from '@/shared/assets/icons/my.svg';
 
 export default function TrainingStart() {
   const queryClient = new QueryClient();
-  console.log('running', running);
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
@@ -19,10 +19,11 @@ export default function TrainingStart() {
           인터벌트레이닝 바로 시작하기
         </CourseBox>
         <BoxWrapper>
-          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={recommendation.src} iconBgColor='white' iconSize={55}>
+          {' '}
+          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={recommendation.src} iconBgColor='white' iconSize={55} direction='column'>
             추천 코스
           </CourseBox>
-          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={my.src} iconBgColor='white' iconSize={55}>
+          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={my.src} iconBgColor='white' iconSize={55} direction='column'>
             내 코스
           </CourseBox>
         </BoxWrapper>
@@ -42,7 +43,7 @@ const Container = styled.div`
 
 const BoxWrapper = styled.div`
   display: flex;
-  justify-content: space-between; 
-  gap: 7px; 
+  justify-content: space-between;
+  gap: 7px;
   width: 100%;
 `;

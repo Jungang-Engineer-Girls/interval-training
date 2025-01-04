@@ -11,14 +11,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: string;
   iconBgColor?: string;
   iconSize?: number;
+  direction?: 'row' | 'column';
   children?: React.ReactNode;
 }
 
-export default function CourseBox({ $width, $height, $fontSize, $variant, icon, iconBgColor, iconSize = 24, children, ...rest }: Props) {
+export default function CourseBox({ $width, $height, $fontSize, $variant, icon, iconBgColor, iconSize = 24, direction = 'row', children, ...rest }: Props) {
   return (
     <>
       <Box $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
-        <ContentWrapper>
+        <ContentWrapper $direction={direction}>
           {icon && (
             <IconWrapper $iconBgColor={iconBgColor} $iconSize={iconSize}>
               <img src={icon} alt='Icon' />
@@ -117,8 +118,9 @@ const Box = styled.button<Props>`
   }}
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ $direction: 'row' | 'column' }>`
   display: flex;
+  flex-direction: ${({ $direction }) => $direction};
   align-items: center; 
 `;
 
