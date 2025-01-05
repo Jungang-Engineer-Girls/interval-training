@@ -19,7 +19,6 @@ export default function TrainingStart() {
           인터벌트레이닝 바로 시작하기
         </CourseBox>
         <BoxWrapper>
-          {' '}
           <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={recommendation.src} iconBgColor='white' iconSize={55} direction='column'>
             추천 코스
           </CourseBox>
