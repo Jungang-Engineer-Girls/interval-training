@@ -10,6 +10,7 @@ const colors = {
   mint_2: '#c6e6e8',
   mint_3: '#8bd2d7',
   mint_4: '#496e79',
+  mint_5: '#E1EAFF',
   mint_gradient: 'linear-gradient(270deg, #EEF8F8 0%, #C6E6E8 100%)',
   pink_1: '#fcf4f7',
   pink_2: '#f6d9e3',

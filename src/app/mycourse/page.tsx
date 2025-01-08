@@ -8,20 +8,20 @@ import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import CourseList from '@/shared/components/course/courseList';
 
-export default function Recommendation() {
+export default function MyCourse() {
   const queryClient = new QueryClient();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <TrainingHeader icon={prev.src} iconSize={25}>
-        추천 코스
+        내 코스
       </TrainingHeader>
       <Section>
         <CourseList
           items={[
-            { title: '30일 만에 -10kg 코스', time: '30분 소요' },
-            { title: '극강의 유산소 코스', time: '45분 소요' },
+            { title: '오여니 코스', time: '25분 소요' },
+            { title: '요이땅 코스', time: '30분 소요' },
           ]}
           $fontSize={16}
           $variant='mint_5'

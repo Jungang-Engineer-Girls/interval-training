@@ -7,7 +7,7 @@ interface CourseListProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   items: { title: string; time: string }[];
 
   $fontSize: number;
-  $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
+  $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'mint_5' | 'pink' | 'red' | 'blue' | 'blue_2';
   children?: React.ReactNode;
 }
 
@@ -75,7 +75,7 @@ const ListBox = styled.button<CourseListProps>`
           border: 1px solid ${theme.colors.black};
         `;
       }
-      case 'mint': {
+      case 'mint_5': {
         return `
           background-color: ${theme.colors.mint_2};
           color: 'black';
