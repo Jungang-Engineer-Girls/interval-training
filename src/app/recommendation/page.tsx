@@ -24,7 +24,7 @@ export default function Recommendation() {
             { title: '극강의 유산소 코스', time: '45분 소요' },
           ]}
           $fontSize={16}
-          $variant='mint_5'
+          $variant='mint'
         />
       </Section>
     </HydrationBoundary>

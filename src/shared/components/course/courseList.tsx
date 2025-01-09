@@ -15,8 +15,8 @@ export default function CourseList({ items, $fontSize, $variant, ...rest }: Cour
   return (
     <>
       {items.map((item, index) => (
-        <ListBox $fontSize={$fontSize} $variant={$variant} {...rest}>
-          <ListItem key={index}>
+        <ListBox $fontSize={$fontSize} $variant={$variant} {...rest} key={index}>
+          <ListItem>
             <ListTitle>{item.title}</ListTitle>
             <Time>{item.time}</Time>
           </ListItem>
@@ -75,7 +75,7 @@ const ListBox = styled.button<CourseListProps>`
           border: 1px solid ${theme.colors.black};
         `;
       }
-      case 'mint_5': {
+      case 'mint': {
         return `
           background-color: ${theme.colors.mint_2};
           color: 'black';

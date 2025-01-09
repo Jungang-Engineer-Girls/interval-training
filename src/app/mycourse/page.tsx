@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import CourseList from '@/shared/components/course/courseList';
+import NewCourse from '@/shared/components/course/newCourse';
 
 export default function MyCourse() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ export default function MyCourse() {
           $fontSize={16}
           $variant='mint_5'
         />
+        <NewCourse>+</NewCourse>
       </Section>
     </HydrationBoundary>
   );
