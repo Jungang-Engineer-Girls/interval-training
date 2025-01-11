@@ -5,10 +5,10 @@ import Button from '@/shared/components/buttons/button';
 import Loading from '../loading/loading';
 
 type StepProps = {
-  onNext: () => void;
+  onNextStep: () => void;
 };
 
-export default function Start({ onNext }: StepProps) {
+export default function Start({ onNextStep }: StepProps) {
   return (
     <>
       <Header>
@@ -20,7 +20,7 @@ export default function Start({ onNext }: StepProps) {
       </ImageWrapper>
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
+        <Button onClick={onNextStep} $width={100} $height={20} $fontSize={12} $variant='blue'>
           시작하기
         </Button>
       </ButtonWrapper>

@@ -12,10 +12,12 @@ import BmiResult from '@/shared/components/profile-step/bmiResult';
 import GoalWeight from '@/shared/components/profile-step/goalWeight';
 import Start from '@/shared/components/profile-step/start';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const steps = ['Nickname', 'BodyInfo', 'BmiResult', 'GoalWeight', 'Start'];
 
 export default function ProfilePage() {
+  const router = useRouter();
   const queryClient = new QueryClient();
   //const [registerData, setRegisterData] = useState()
   const [step, setStep] = useState(0);
@@ -26,6 +28,10 @@ export default function ProfilePage() {
   };
   const onSkip = () => {
     setStep((prev) => Math.min(prev + 3, steps.length - 1));
+  };
+
+  const onNextStep = () => {
+    router.push('/training-start');
   };
 
   // const onPrev = () => {
@@ -50,6 +56,7 @@ export default function ProfilePage() {
     } catch (err) {
     } finally {
       setLoading(false);
+      onNext();
     }
   };
   return (
@@ -64,7 +71,7 @@ export default function ProfilePage() {
             onNext={(data: any) => handleGoalWeightNext(data)} // API 호출
           />
         )}
-        {steps[step] === 'Start' && <Start onNext={onNext} />}
+        {steps[step] === 'Start' && <Start onNextStep={onNextStep} />}
 
         {loading && <Loading />}
       </Section>

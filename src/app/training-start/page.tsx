@@ -7,9 +7,19 @@ import CourseBox from '@/shared/components/course/courseBox';
 import running from '@/shared/assets/icons/running.svg';
 import recommendation from '@/shared/assets/icons/recommendation.svg';
 import my from '@/shared/assets/icons/my.svg';
+import { useRouter } from 'next/navigation';
 
 export default function TrainingStart() {
+  const router = useRouter();
   const queryClient = new QueryClient();
+
+  const onRecommendation = () => {
+    router.push('/recommendation');
+  };
+
+  const onMyCourse = () => {
+    router.push('/mycourse');
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -19,10 +29,10 @@ export default function TrainingStart() {
           인터벌트레이닝 바로 시작하기
         </CourseBox>
         <BoxWrapper>
-          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={recommendation.src} iconBgColor='white' iconSize={55} direction='column'>
+          <CourseBox onClick={onRecommendation} $width={125} $height={148} $fontSize={20} $variant='mint' icon={recommendation.src} iconBgColor='white' iconSize={55} direction='column'>
             추천 코스
           </CourseBox>
-          <CourseBox $width={125} $height={148} $fontSize={20} $variant='mint' icon={my.src} iconBgColor='white' iconSize={55} direction='column'>
+          <CourseBox onClick={onMyCourse} $width={125} $height={148} $fontSize={20} $variant='mint' icon={my.src} iconBgColor='white' iconSize={55} direction='column'>
             내 코스
           </CourseBox>
         </BoxWrapper>
