@@ -1,5 +1,4 @@
 'use client';
-
 import styled from '@emotion/styled';
 
 import theme from '@/shared/styles/theme';
@@ -9,32 +8,43 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $height: number;
   $fontSize: number;
   $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
+  icon?: string;
+  iconBgColor?: string;
+  iconSize?: number;
+  direction?: 'row' | 'column';
   children?: React.ReactNode;
 }
 
-function Button({ $width, $height, $fontSize, $variant, children, ...rest }: Props) {
+export default function CourseBox({ $width, $height, $fontSize, $variant, icon, iconBgColor, iconSize = 24, direction = 'row', children, ...rest }: Props) {
   return (
-    <Wrapper $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
-      <span>{children}</span>
-    </Wrapper>
+    <>
+      <Box $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
+        <ContentWrapper $direction={direction}>
+          {icon && (
+            <IconWrapper $iconBgColor={iconBgColor} $iconSize={iconSize}>
+              <img src={icon} alt='Icon' />
+            </IconWrapper>
+          )}
+          <span>{children}</span>
+        </ContentWrapper>
+      </Box>
+    </>
   );
 }
 
-export default Button;
-
-const Wrapper = styled.button<Props>`
+const Box = styled.button<Props>`
   cursor: pointer;
-
   box-sizing: border-box;
   width: ${({ $width }) => `clamp(fit-content, $width, ${$width});`};
   height: height;
   padding: 12px 24px;
+  border-radius:20px;
 
   font-family: NanumSquareNeo-Bold, sans-serif;
   font-size: ${({ $fontSize }) => `clamp(8px, ${$fontSize}px, ${$fontSize}px)`};
+    font-weight: 600;
 
   border: none;
-  border-radius: 54px;
 
   ${({ $variant }) => {
     switch ($variant) {
@@ -75,7 +85,7 @@ const Wrapper = styled.button<Props>`
       case 'mint': {
         return `
           background-color: ${theme.colors.mint_2};
-          color: ${theme.colors.blue_2};
+          color: 'black';
           border: 1px solid ${theme.colors.mint_2};
         `;
       }
@@ -106,4 +116,25 @@ const Wrapper = styled.button<Props>`
       }
     }
   }}
+`;
+
+const ContentWrapper = styled.div<{ $direction: 'row' | 'column' }>`
+  display: flex;
+  flex-direction: ${({ $direction }) => $direction};
+  align-items: center; 
+`;
+
+const IconWrapper = styled.span<{ $iconBgColor?: string; $iconSize?: number }>`
+  width: ${({ $iconSize }) => `${$iconSize}px`};
+  height: ${({ $iconSize }) => `${$iconSize}px`};
+  border-radius: 50%; 
+  background-color: ${({ $iconBgColor }) => $iconBgColor || 'white'}; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 70%; 
+    height: 70%;
+  }
 `;

@@ -5,7 +5,7 @@ import { Global } from '@emotion/react';
 import { globalStyles } from '@/shared/styles/global';
 import styled from '@emotion/styled';
 
-export default function ProfileLayout({
+export default function RecommenadationLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

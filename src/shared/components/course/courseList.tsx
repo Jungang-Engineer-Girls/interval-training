@@ -1,40 +1,43 @@
 'use client';
-
 import styled from '@emotion/styled';
 
 import theme from '@/shared/styles/theme';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  $width: number;
-  $height: number;
+interface CourseListProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  items: { title: string; time: string }[];
+
   $fontSize: number;
-  $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
+  $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'mint_5' | 'pink' | 'red' | 'blue' | 'blue_2';
   children?: React.ReactNode;
 }
 
-function Button({ $width, $height, $fontSize, $variant, children, ...rest }: Props) {
+export default function CourseList({ items, $fontSize, $variant, ...rest }: CourseListProps) {
   return (
-    <Wrapper $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
-      <span>{children}</span>
-    </Wrapper>
+    <>
+      {items.map((item, index) => (
+        <ListBox $fontSize={$fontSize} $variant={$variant} {...rest} key={index}>
+          <ListItem>
+            <ListTitle>{item.title}</ListTitle>
+            <Time>{item.time}</Time>
+          </ListItem>
+        </ListBox>
+      ))}
+    </>
   );
 }
 
-export default Button;
-
-const Wrapper = styled.button<Props>`
+const ListBox = styled.button<CourseListProps>`
   cursor: pointer;
-
   box-sizing: border-box;
-  width: ${({ $width }) => `clamp(fit-content, $width, ${$width});`};
-  height: height;
+  width: 100%;
+  height: 80px;
   padding: 12px 24px;
+  border-radius:20px;
 
-  font-family: NanumSquareNeo-Bold, sans-serif;
-  font-size: ${({ $fontSize }) => `clamp(8px, ${$fontSize}px, ${$fontSize}px)`};
+  font-size: 16px;
+  font-weight: 600;
 
   border: none;
-  border-radius: 54px;
 
   ${({ $variant }) => {
     switch ($variant) {
@@ -75,7 +78,7 @@ const Wrapper = styled.button<Props>`
       case 'mint': {
         return `
           background-color: ${theme.colors.mint_2};
-          color: ${theme.colors.blue_2};
+          color: 'black';
           border: 1px solid ${theme.colors.mint_2};
         `;
       }
@@ -106,4 +109,20 @@ const Wrapper = styled.button<Props>`
       }
     }
   }}
+`;
+
+const ListItem = styled.div`
+  margin-bottom: 12px;
+`;
+const ListTitle = styled.div`
+  justify-content: left;
+  font-size: 16px; 
+  font-weight: 600;
+  `;
+const Time = styled.div`
+  justify-content: left;
+  font-size: 12px;
+  font-weight :400 ;
+  color: #87A7F8;
+  margin-top: 4px; 
 `;

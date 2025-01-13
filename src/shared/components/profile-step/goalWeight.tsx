@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Button from '@/shared/components/buttons/button';
 
 type StepProps = {
-  onNext: () => void;
+  onNext: (data: any) => void;
 };
 
 export default function GoalWeight({ onNext }: StepProps) {
@@ -22,7 +22,7 @@ export default function GoalWeight({ onNext }: StepProps) {
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
           등록하기
         </Button>
       </ButtonWrapper>
