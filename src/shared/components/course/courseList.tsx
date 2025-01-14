@@ -82,6 +82,13 @@ const ListBox = styled.button<CourseListProps>`
           border: 1px solid ${theme.colors.mint_2};
         `;
       }
+           case 'mint_5': { 
+        return `
+          background-color: ${theme.colors.mint_5};
+          color: black;
+          border: 1px solid ${theme.colors.mint_5};
+        `;
+      }
       case 'pink': {
         return `
           background-color: ${theme.colors.pink_2};
