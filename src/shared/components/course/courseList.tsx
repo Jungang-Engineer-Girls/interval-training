@@ -33,7 +33,7 @@ const ListBox = styled.button<CourseListProps>`
   height: 80px;
   padding: 12px 24px;
   border-radius:20px;
-
+  text-align: left;
   font-size: 16px;
   font-weight: 600;
 
