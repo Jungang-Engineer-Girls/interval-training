@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import Button from '@/shared/components/buttons/button';
+import NewCourse from '@/shared/components/course/newCourse';
 
 export default function Making() {
   const queryClient = new QueryClient();
@@ -43,7 +44,8 @@ export default function Making() {
             </CustomSelect>
           </SelectGroup>
         </SelectWrapper>
-        
+        <NewCourse $height={34} $radius={10}>+</NewCourse>
+
         <ButtonWrapper>
           <Button $width={100} $height={20} $fontSize={12} $variant='blue'>만들기</Button>
         </ButtonWrapper>
@@ -112,6 +114,10 @@ const CustomSelect = styled.select`
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
+background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none"><g transform="rotate(270, 4.5, 8)"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.78584 7.99997L8.67834 13.8925L7.50001 15.0708L1.01834 8.58914C0.862116 8.43286 0.774353 8.22094 0.774353 7.99997C0.774353 7.779 0.862116 7.56708 1.01834 7.4108L7.50001 0.929138L8.67834 2.10747L2.78584 7.99997Z" fill="black"/></g></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
 `;
 
 const ButtonWrapper = styled.div`
