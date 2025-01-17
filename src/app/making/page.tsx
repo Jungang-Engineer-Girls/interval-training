@@ -44,7 +44,7 @@ export default function Making() {
             </CustomSelect>
           </SelectGroup>
         </SelectWrapper>
-        <NewCourse $height={34} $radius={10}>+</NewCourse>
+        <NewCourse $height={34} $radius={10} $color="grey_6">+</NewCourse>
 
         <ButtonWrapper>
           <Button $width={100} $height={20} $fontSize={12} $variant='blue'>만들기</Button>
