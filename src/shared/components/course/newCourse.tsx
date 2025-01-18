@@ -18,6 +18,9 @@ export default function NewCourse({ $height,$radius,$color, ...rest }: newCourse
 }
 
 const ListBox = styled.button<newCourseProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;

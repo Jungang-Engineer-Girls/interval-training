@@ -8,9 +8,15 @@ import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import CourseList from '@/shared/components/course/courseList';
 import NewCourse from '@/shared/components/course/newCourse';
+import { useRouter } from 'next/navigation';
 
 export default function MyCourse() {
+  const router = useRouter()
   const queryClient = new QueryClient();
+
+  const onMaking = () => {
+    router.push('/making')
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -27,7 +33,7 @@ export default function MyCourse() {
           $fontSize={16}
           $variant='mint_5'
         />
-        <NewCourse>+</NewCourse>
+        <NewCourse onClick={onMaking} $height={80} $radius={20} $color="blue">+</NewCourse>
       </Section>
     </HydrationBoundary>
   );
