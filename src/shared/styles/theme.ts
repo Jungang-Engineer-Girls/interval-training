@@ -6,6 +6,7 @@ const colors = {
   grey_3: '#c1c3c2',
   grey_4: '#838685',
   grey_5: '#313634',
+  grey_6: '#DEE2E6',
   mint_1: '#eef8f8',
   mint_2: '#c6e6e8',
   mint_3: '#8bd2d7',

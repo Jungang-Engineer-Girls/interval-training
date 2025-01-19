@@ -33,7 +33,7 @@ const ListBox = styled.button<CourseListProps>`
   height: 80px;
   padding: 12px 24px;
   border-radius:20px;
-
+  text-align: left;
   font-size: 16px;
   font-weight: 600;
 
@@ -80,6 +80,13 @@ const ListBox = styled.button<CourseListProps>`
           background-color: ${theme.colors.mint_2};
           color: 'black';
           border: 1px solid ${theme.colors.mint_2};
+        `;
+      }
+           case 'mint_5': { 
+        return `
+          background-color: ${theme.colors.mint_5};
+          color: black;
+          border: 1px solid ${theme.colors.mint_5};
         `;
       }
       case 'pink': {
