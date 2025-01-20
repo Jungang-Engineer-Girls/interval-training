@@ -2,24 +2,29 @@
 import styled from '@emotion/styled';
 
 import theme from '@/shared/styles/theme';
+import { useRouter } from 'next/navigation';
 
 interface CourseListProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  items: { title: string; time: string }[];
+  items: {id:number; title: string; time: string}[];
 
   $fontSize: number;
   $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'mint_5' | 'pink' | 'red' | 'blue' | 'blue_2';
   children?: React.ReactNode;
 }
 
-export default function CourseList({ items, $fontSize, $variant, ...rest }: CourseListProps) {
+export default function CourseList({ items, $fontSize, $variant }: CourseListProps) {
+  const router = useRouter();
   return (
     <>
       {items.map((item, index) => (
-        <ListBox $fontSize={$fontSize} $variant={$variant} {...rest} key={index}>
-          <ListItem>
+        <ListBox $fontSize={$fontSize} $variant={$variant} key={index} onClick={() => router.push(`/recommendation/${item.id}`)}>
+
+            <ListItem>
             <ListTitle>{item.title}</ListTitle>
             <Time>{item.time}</Time>
           </ListItem>
+
+     
         </ListBox>
       ))}
     </>

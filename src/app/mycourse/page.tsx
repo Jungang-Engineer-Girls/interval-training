@@ -27,8 +27,8 @@ export default function MyCourse() {
       <Section>
         <CourseList
           items={[
-            { title: '오여니 코스', time: '25분 소요' },
-            { title: '요이땅 코스', time: '30분 소요' },
+            {id:3, title: '오여니 코스', time: '25분 소요' },
+            {id:4, title: '요이땅 코스', time: '30분 소요' },
           ]}
           $fontSize={16}
           $variant='mint_5'
