@@ -47,7 +47,8 @@ export default function Timer({   duration,
   
 
   return (
-    <Container>
+    <>
+        <Container>
       <svg
         width={radius * 2 + thickStrokeWidth}
         height={radius * 2 + thickStrokeWidth}
@@ -92,7 +93,15 @@ export default function Timer({   duration,
         )}    
       </svg>
       <Time color={color} >{Math.ceil((1 - progress / 100) * duration)}</Time>
+
     </Container>
+    <PlayerContainer>
+    <PlayerCircle />
+    <Start color={color}  />
+  </PlayerContainer>
+    </>
+
+     
   );
 }
 
@@ -109,5 +118,34 @@ const Time = styled.div<{ color: string }>`
   font-size: 40px;
   font-weight: 300;
   color: ${({ color }) => color};
+`;
+
+const PlayerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+  height: 100%; 
+  position: relative; 
+`;
+
+const PlayerCircle = styled.span`
+  box-sizing: border-box;
+  width: 45px; 
+  height: 45px;
+  background-color: #E1EAFF;
+  border-radius: 100%;
+`
+
+const Start = styled.span<{ color: string }>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid ${({ color }) => color};
 `;
 
