@@ -1,107 +1,86 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 interface TimerProps {
-  duration: number; 
+  duration: number;
   radius: number;
   thinStrokeWidth: number; // 기본 두께
-  thickStrokeWidth: number; // 진행 중 두께 
-  color?: string; 
+  thickStrokeWidth: number; // 진행 중 두께
+  color?: string;
   backgroundColor?: string;
 }
 
-export default function Timer({   duration,
-  radius,
-  thinStrokeWidth,
-  thickStrokeWidth,
-  color = "#87A7F8",
-  backgroundColor = '#D9D9D9',}: TimerProps) {
-   const [progress, setProgress] = useState(0); 
+export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWidth, color = '#87A7F8', backgroundColor = '#D9D9D9' }: TimerProps) {
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const startTime = Date.now();
 
     const interval = setInterval(() => {
-      const elapsedTime = (Date.now() - startTime) / 1000; 
-      const newProgress = Math.min((elapsedTime / duration) * 100, 100); 
+      const elapsedTime = (Date.now() - startTime) / 1000;
+      const newProgress = Math.min((elapsedTime / duration) * 100, 100);
       setProgress(newProgress);
 
       if (elapsedTime >= duration) {
         clearInterval(interval);
       }
-    }, 16); 
+    }, 16);
 
     return () => clearInterval(interval);
   }, [duration]);
-
 
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   //점
-  const angle = (progress / 100) * 360 - 90; 
+  const angle = (progress / 100) * 360 - 90;
   const radians = (angle * Math.PI) / 180;
   const knobX = radius + thickStrokeWidth / 2 + radius * Math.cos(radians);
   const knobY = radius + thickStrokeWidth / 2 + radius * Math.sin(radians);
 
-  
-
   return (
     <>
-        <Container>
-      <svg
-        width={radius * 2 + thickStrokeWidth}
-        height={radius * 2 + thickStrokeWidth}
-        viewBox={`0 0 ${radius * 2 + thickStrokeWidth} ${radius * 2 + thickStrokeWidth}`}
-      >
-     
-        <circle
-          cx={radius + thickStrokeWidth / 2}
-          cy={radius + thickStrokeWidth / 2}
-          r={radius}
-          stroke={backgroundColor}
-          strokeWidth={thinStrokeWidth}
-          fill="none"
-        />
-   
-        <circle
-          cx={radius + thickStrokeWidth / 2}
-          cy={radius + thickStrokeWidth / 2}
-          r={radius}
-          stroke={color}
-          strokeWidth={thickStrokeWidth}
-          fill="none"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          style={{
-            transform: 'rotate(-90deg)',//시작 시점
-            transformOrigin: 'center',
-            transition: 'stroke-dashoffset 0.1s linear',
-          }}
-        />
-        {progress < 100 && (
+      <Container>
+        <svg width={radius * 2 + thickStrokeWidth} height={radius * 2 + thickStrokeWidth} viewBox={`0 0 ${radius * 2 + thickStrokeWidth} ${radius * 2 + thickStrokeWidth}`}>
+          <circle cx={radius + thickStrokeWidth / 2} cy={radius + thickStrokeWidth / 2} r={radius} stroke={backgroundColor} strokeWidth={thinStrokeWidth} fill='none' />
+
           <circle
-            cx={knobX}
-            cy={knobY}
-            r={6} //원 반지름 
-            fill={color}
+            cx={radius + thickStrokeWidth / 2}
+            cy={radius + thickStrokeWidth / 2}
+            r={radius}
+            stroke={color}
+            strokeWidth={thickStrokeWidth}
+            fill='none'
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap='round'
             style={{
-              transition: 'cx 0.1s linear, cy 0.1s linear',
+              transform: 'rotate(-90deg)', //시작 시점
+              transformOrigin: 'center',
+              transition: 'stroke-dashoffset 0.1s linear',
             }}
           />
-        )}    
-      </svg>
-      <Time color={color} >{Math.ceil((1 - progress / 100) * duration)}</Time>
-
-    </Container>
-    <PlayerContainer>
-    <PlayerCircle />
-    <Start color={color}  />
-  </PlayerContainer>
+          {progress < 100 && (
+            <circle
+              cx={knobX}
+              cy={knobY}
+              r={6} //원 반지름
+              fill={color}
+              style={{
+                transition: 'cx 0.1s linear, cy 0.1s linear',
+              }}
+            />
+          )}
+        </svg>
+        <Time color={color}>{Math.ceil((1 - progress / 100) * duration)}</Time>
+      </Container>
+      <PlayerContainer>
+        <PlayerCircle>
+          <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
+        </PlayerCircle>
+      </PlayerContainer>
     </>
-
-     
   );
 }
 
@@ -131,22 +110,11 @@ const PlayerContainer = styled.div`
 
 const PlayerCircle = styled.span`
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 45px; 
   height: 45px;
   background-color: #E1EAFF;
   border-radius: 100%;
-`
-
-const Start = styled.span<{ color: string }>`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width:19px;
-  height: 20px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 15px solid ${({ color }) => color};
-  border-radius: 50%;
 `;
-
