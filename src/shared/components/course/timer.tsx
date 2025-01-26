@@ -1,6 +1,9 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
 
 interface TimerProps {
   duration: number;
@@ -13,6 +16,7 @@ interface TimerProps {
 
 export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWidth, color = '#87A7F8', backgroundColor = '#D9D9D9' }: TimerProps) {
   const [progress, setProgress] = useState(0);
+  const [play, setPlay] = useState(false);
 
   useEffect(() => {
     const startTime = Date.now();
@@ -38,6 +42,10 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
   const radians = (angle * Math.PI) / 180;
   const knobX = radius + thickStrokeWidth / 2 + radius * Math.cos(radians);
   const knobY = radius + thickStrokeWidth / 2 + radius * Math.sin(radians);
+
+  const onPlay = () => {
+    setPlay(!play);
+  };
 
   return (
     <>
@@ -76,9 +84,15 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
         <Time color={color}>{Math.ceil((1 - progress / 100) * duration)}</Time>
       </Container>
       <PlayerContainer>
-        <PlayerCircle>
-          <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
-        </PlayerCircle>
+        {play ? (
+          <PlayerTransparentCircle onClick={onPlay} color={color}>
+            <PauseRoundedIcon style={{ fontSize: '30px', color }} />
+          </PlayerTransparentCircle>
+        ) : (
+          <PlayerCircle onClick={onPlay}>
+            <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
+          </PlayerCircle>
+        )}
       </PlayerContainer>
     </>
   );
@@ -117,4 +131,15 @@ const PlayerCircle = styled.span`
   height: 45px;
   background-color: #E1EAFF;
   border-radius: 100%;
+`;
+
+const PlayerTransparentCircle = styled.span<{ color: string }>`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px; 
+  height: 45px;
+  border-radius: 100%;
+  border:1px solid ${({ color }) => color};
 `;
