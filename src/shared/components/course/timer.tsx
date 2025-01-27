@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
+import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 
 interface TimerProps {
   duration: number;
@@ -83,17 +84,24 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
         </svg>
         <Time color={color}>{Math.ceil((1 - progress / 100) * duration)}</Time>
       </Container>
-      <PlayerContainer>
-        {play ? (
+      <PlayerBox>
+        <PlayerContainer>
+          {play ? (
+            <PlayerTransparentCircle onClick={onPlay} color={color}>
+              <PauseRoundedIcon style={{ fontSize: '30px', color }} />
+            </PlayerTransparentCircle>
+          ) : (
+            <PlayerCircle onClick={onPlay}>
+              <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
+            </PlayerCircle>
+          )}
+        </PlayerContainer>
+        <PlayerContainer>
           <PlayerTransparentCircle onClick={onPlay} color={color}>
-            <PauseRoundedIcon style={{ fontSize: '30px', color }} />
+            <ReplayRoundedIcon style={{ fontSize: '30px', color }} />
           </PlayerTransparentCircle>
-        ) : (
-          <PlayerCircle onClick={onPlay}>
-            <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
-          </PlayerCircle>
-        )}
-      </PlayerContainer>
+        </PlayerContainer>
+      </PlayerBox>
     </>
   );
 }
@@ -111,6 +119,12 @@ const Time = styled.div<{ color: string }>`
   font-size: 40px;
   font-weight: 300;
   color: ${({ color }) => color};
+`;
+
+const PlayerBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 `;
 
 const PlayerContainer = styled.div`
