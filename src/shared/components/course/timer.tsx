@@ -20,7 +20,9 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
-    const startTime = Date.now();
+    if (!play) return;
+
+    const startTime = Date.now() - (progress / 100) * duration * 1000;
 
     const interval = setInterval(() => {
       const elapsedTime = (Date.now() - startTime) / 1000;
@@ -29,11 +31,12 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
 
       if (elapsedTime >= duration) {
         clearInterval(interval);
+        setPlay(false);
       }
     }, 16);
 
     return () => clearInterval(interval);
-  }, [duration]);
+  }, [play, progress, duration]);
 
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
@@ -46,6 +49,11 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
 
   const onPlay = () => {
     setPlay(!play);
+  };
+
+  const onReset = () => {
+    setPlay(false);
+    setProgress(0);
   };
 
   return (
@@ -85,19 +93,19 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
         <Time color={color}>{Math.ceil((1 - progress / 100) * duration)}</Time>
       </Container>
       <PlayerBox>
-        <PlayerContainer>
+        <PlayerContainer onClick={onPlay}>
           {play ? (
-            <PlayerTransparentCircle onClick={onPlay} color={color}>
+            <PlayerTransparentCircle color={color}>
               <PauseRoundedIcon style={{ fontSize: '30px', color }} />
             </PlayerTransparentCircle>
           ) : (
-            <PlayerCircle onClick={onPlay}>
+            <PlayerCircle>
               <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
             </PlayerCircle>
           )}
         </PlayerContainer>
         <PlayerContainer>
-          <PlayerTransparentCircle onClick={onPlay} color={color}>
+          <PlayerTransparentCircle onClick={onReset} color={color}>
             <ReplayRoundedIcon style={{ fontSize: '30px', color }} />
           </PlayerTransparentCircle>
         </PlayerContainer>
@@ -124,6 +132,8 @@ const Time = styled.div<{ color: string }>`
 const PlayerBox = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 `;
 
@@ -131,7 +141,7 @@ const PlayerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; 
+  width: 60px; 
   height: 100%; 
   position: relative; 
 `;
