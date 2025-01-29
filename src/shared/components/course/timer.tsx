@@ -110,6 +110,7 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
           </PlayerTransparentCircle>
         </PlayerContainer>
       </PlayerBox>
+      <DashedLine />
     </>
   );
 }
@@ -166,4 +167,11 @@ const PlayerTransparentCircle = styled.span<{ color: string }>`
   height: 45px;
   border-radius: 100%;
   border:1px solid ${({ color }) => color};
+`;
+
+const DashedLine = styled.div`
+box-sizing: border-box;
+width:100%;
+border-bottom: 1px dashed #D9D9D9;
+margin: 20px 0;
 `;
