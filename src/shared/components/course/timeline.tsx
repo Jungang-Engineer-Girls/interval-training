@@ -1,33 +1,46 @@
 'use client';
 import styled from '@emotion/styled';
 
-export default function Timeline() {
+interface TimelineProps {
+  items: { text: string }[];
+}
+
+export default function Timeline({ items }: TimelineProps) {
   return (
-    <>
-      <ListBox>
-        <CircleTime />
-        <TimeText> 빠르게 걷기 | 8분 | 속도6</TimeText>
-      </ListBox>
-    </>
+    <Container>
+      {items.map((item, index) => (
+        <ListBox key={index}>
+          <CircleTime />
+          <TimeText>{item.text}</TimeText>
+        </ListBox>
+      ))}
+    </Container>
   );
 }
 
-const ListBox = styled.div`
+const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+`;
 
+const ListBox = styled.div`
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
 `;
 
 const CircleTime = styled.span`
   box-sizing: border-box;
-  width:10px;
+  width: 10px;
   height: 10px;
   background-color: #D9D9D9;
   border-radius: 100%;
 `;
 
 const TimeText = styled.span`
-margin:0 10px;
+  text-align: left;
+  margin: 5px 10px;
   font-size: 10px;
   font-weight: 400;
 `;
