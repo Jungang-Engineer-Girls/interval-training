@@ -11,29 +11,29 @@ import NewCourse from '@/shared/components/course/newCourse';
 import { useRouter } from 'next/navigation';
 
 export default function MyCourse() {
-  const router = useRouter()
+  const router = useRouter();
   const queryClient = new QueryClient();
 
   const onMaking = () => {
-    router.push('/making')
-  }
+    router.push('/making');
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
-      <TrainingHeader icon={prev.src} iconSize={25}>
-        내 코스
-      </TrainingHeader>
+      <TrainingHeader icon={prev.src}>내 코스</TrainingHeader>
       <Section>
         <CourseList
           items={[
-            {id:3, title: '오여니 코스', time: '25분 소요' },
-            {id:4, title: '요이땅 코스', time: '30분 소요' },
+            { id: 3, title: '오여니 코스', time: '25분 소요' },
+            { id: 4, title: '요이땅 코스', time: '30분 소요' },
           ]}
           $fontSize={16}
           $variant='mint_5'
         />
-        <NewCourse onClick={onMaking} $height={80} $radius={20} $color="blue">+</NewCourse>
+        <NewCourse onClick={onMaking} $height={80} $radius={20} $color='blue'>
+          +
+        </NewCourse>
       </Section>
     </HydrationBoundary>
   );
