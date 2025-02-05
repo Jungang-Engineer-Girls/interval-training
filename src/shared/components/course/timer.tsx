@@ -9,51 +9,50 @@ import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
 interface TimerProps {
   duration: number;
   radius: number;
-  thinStrokeWidth: number; // 기본 두께
-  thickStrokeWidth: number; // 진행 중 두께
+  thinStrokeWidth: number;
+  thickStrokeWidth: number;
   color?: string;
   backgroundColor?: string;
 }
 
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+};
+
 export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWidth, color = '#87A7F8', backgroundColor = '#D9D9D9' }: TimerProps) {
-  const [progress, setProgress] = useState(0);
+  const totalSeconds = duration * 60;
+  const [remainingTime, setRemainingTime] = useState(totalSeconds);
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
     if (!play) return;
 
-    const startTime = Date.now() - (progress / 100) * duration * 1000;
+    const startTime = Date.now();
 
     const interval = setInterval(() => {
-      const elapsedTime = (Date.now() - startTime) / 1000;
-      const newProgress = Math.min((elapsedTime / duration) * 100, 100);
-      setProgress(newProgress);
+      const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+      const newRemainingTime = Math.max(totalSeconds - elapsedSeconds, 0);
+      setRemainingTime(newRemainingTime);
 
-      if (elapsedTime >= duration) {
+      if (newRemainingTime === 0) {
         clearInterval(interval);
         setPlay(false);
       }
-    }, 16);
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [play, progress, duration]);
+  }, [play, totalSeconds]);
 
+  const progress = ((totalSeconds - remainingTime) / totalSeconds) * 100;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
-  //점
-  const angle = (progress / 100) * 360 - 90;
-  const radians = (angle * Math.PI) / 180;
-  const knobX = radius + thickStrokeWidth / 2 + radius * Math.cos(radians);
-  const knobY = radius + thickStrokeWidth / 2 + radius * Math.sin(radians);
-
-  const onPlay = () => {
-    setPlay(!play);
-  };
-
+  const onPlay = () => setPlay(!play);
   const onReset = () => {
     setPlay(false);
-    setProgress(0);
+    setRemainingTime(totalSeconds);
   };
 
   return (
@@ -61,7 +60,6 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
       <Container>
         <svg width={radius * 2 + thickStrokeWidth} height={radius * 2 + thickStrokeWidth} viewBox={`0 0 ${radius * 2 + thickStrokeWidth} ${radius * 2 + thickStrokeWidth}`}>
           <circle cx={radius + thickStrokeWidth / 2} cy={radius + thickStrokeWidth / 2} r={radius} stroke={backgroundColor} strokeWidth={thinStrokeWidth} fill='none' />
-
           <circle
             cx={radius + thickStrokeWidth / 2}
             cy={radius + thickStrokeWidth / 2}
@@ -73,24 +71,13 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
             strokeDashoffset={strokeDashoffset}
             strokeLinecap='round'
             style={{
-              transform: 'rotate(-90deg)', //시작 시점
+              transform: 'rotate(-90deg)',
               transformOrigin: 'center',
               transition: 'stroke-dashoffset 0.1s linear',
             }}
           />
-          {progress < 100 && (
-            <circle
-              cx={knobX}
-              cy={knobY}
-              r={6} //원 반지름
-              fill={color}
-              style={{
-                transition: 'cx 0.1s linear, cy 0.1s linear',
-              }}
-            />
-          )}
         </svg>
-        <Time color={color}>{Math.ceil((1 - progress / 100) * duration)}</Time>
+        <Time color={color}>{formatTime(remainingTime)}</Time>
       </Container>
       <PlayerBox>
         <PlayerContainer onClick={onPlay}>
@@ -148,7 +135,6 @@ const PlayerContainer = styled.div`
 `;
 
 const PlayerCircle = styled.span`
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +145,6 @@ const PlayerCircle = styled.span`
 `;
 
 const PlayerTransparentCircle = styled.span<{ color: string }>`
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,8 +155,7 @@ const PlayerTransparentCircle = styled.span<{ color: string }>`
 `;
 
 const DashedLine = styled.div`
-box-sizing: border-box;
-width:100%;
-border-bottom: 1px dashed #D9D9D9;
-margin: 20px 0;
+  width: 100%;
+  border-bottom: 1px dashed #D9D9D9;
+  margin: 20px 0;
 `;
