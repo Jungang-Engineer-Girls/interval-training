@@ -13,6 +13,7 @@ interface TimerProps {
   thickStrokeWidth: number;
   color?: string;
   backgroundColor?: string;
+  onTimeUpdate?: (remainingTime: number) => void;
 }
 
 const formatTime = (seconds: number) => {

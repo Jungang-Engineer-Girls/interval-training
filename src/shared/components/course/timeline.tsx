@@ -1,16 +1,31 @@
 'use client';
 import styled from '@emotion/styled';
+import { useState, useEffect } from 'react';
 
 interface TimelineProps {
-  items: { text: string }[];
+  items: { text: string; duration: number }[];
+  currentTime: number;
 }
 
-export default function Timeline({ items }: TimelineProps) {
+export default function Timeline({ items, currentTime }: TimelineProps) {
+  const [playing, setPlaying] = useState(0);
+
+  useEffect(() => {
+    let accumulatedTime = 0;
+
+    for (let i = 0; i < items.length; i++) {
+      accumulatedTime += items[i].duration;
+      if (currentTime < accumulatedTime) {
+        setPlaying(i);
+        break;
+      }
+    }
+  }, [currentTime, items]);
   return (
     <Container>
       {items.map((item, index) => (
         <ListBox key={index}>
-          <CircleTime />
+          <CircleTime playing={index === playing} />
           <TimeText>{item.text}</TimeText>
         </ListBox>
       ))}
@@ -30,11 +45,11 @@ const ListBox = styled.div`
   align-items: center;
 `;
 
-const CircleTime = styled.span`
+const CircleTime = styled.span<{ playing: boolean }>`
   box-sizing: border-box;
   width: 10px;
   height: 10px;
-  background-color: #D9D9D9;
+  background-color: ${({ playing }) => (playing ? '#87A7F8' : '#D9D9D9')};
   border-radius: 100%;
 `;
 
