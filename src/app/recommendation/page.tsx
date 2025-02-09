@@ -14,14 +14,12 @@ export default function Recommendation() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
-      <TrainingHeader icon={prev.src} iconSize={25}>
-        추천 코스
-      </TrainingHeader>
+      <TrainingHeader icon={prev.src}>추천 코스</TrainingHeader>
       <Section>
         <CourseList
           items={[
-            { title: '30일 만에 -10kg 코스', time: '30분 소요' },
-            { title: '극강의 유산소 코스', time: '45분 소요' },
+            { id: 1, title: '30일 만에 -10kg 코스', time: '30분 소요' },
+            { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
           ]}
           $fontSize={16}
           $variant='mint_5'

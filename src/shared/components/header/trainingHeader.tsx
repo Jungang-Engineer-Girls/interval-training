@@ -4,11 +4,10 @@ import { useRouter } from 'next/navigation';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: string;
-  iconSize?: number;
   children?: React.ReactNode;
 }
 
-export default function TrainingHeader({ icon, iconSize, children }: Props) {
+export default function TrainingHeader({ icon, children }: Props) {
   const router = useRouter();
 
   const onPrev = () => {
@@ -17,7 +16,7 @@ export default function TrainingHeader({ icon, iconSize, children }: Props) {
   return (
     <Header>
       {icon && (
-        <IconWrapper $iconSize={iconSize} onClick={onPrev}>
+        <IconWrapper onClick={onPrev}>
           <img src={icon} alt='prev' />
         </IconWrapper>
       )}
@@ -35,14 +34,14 @@ const Header = styled.div`
   height: 20px;
   box-sizing: border-box;
 `;
-const IconWrapper = styled.div<{ $iconSize?: number }>`
+const IconWrapper = styled.div`
   position: absolute;
   left: 16px; 
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ $iconSize }) => `${$iconSize}px`};
-  height: ${({ $iconSize }) => `${$iconSize}px`};
+  width: 10px;  
+  height: 20px; 
   cursor: pointer;
 
   img {
@@ -52,7 +51,7 @@ const IconWrapper = styled.div<{ $iconSize?: number }>`
 `;
 
 const Title = styled.span`
-  font-size: 18px; 
+  font-size: 12px; 
   font-weight: bold;
   text-align: center; 
 `;

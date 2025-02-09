@@ -15,43 +15,43 @@ export default function Making() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
-      <TrainingHeader icon={prev.src} iconSize={25}>
-        내 코스 만들기
-      </TrainingHeader>
+      <TrainingHeader icon={prev.src}>내 코스 만들기</TrainingHeader>
       <Section>
-    <Title>코스 이름</Title>
-    <Input />
-    <Title>코스 루틴</Title>
- <SelectWrapper>
+        <Title>코스 이름</Title>
+        <Input />
+        <Title>코스 루틴</Title>
+        <SelectWrapper>
           <SelectGroup>
             <Label>분</Label>
             <CustomSelect>
-              <option value="10">10분</option>
-              <option value="15">15분</option>
-              <option value="20">20분</option>
-              <option value="25">25분</option>
-              <option value="30">30분</option>
+              <option value='10'>10분</option>
+              <option value='15'>15분</option>
+              <option value='20'>20분</option>
+              <option value='25'>25분</option>
+              <option value='30'>30분</option>
             </CustomSelect>
           </SelectGroup>
           <SelectGroup>
             <Label>속도</Label>
             <CustomSelect>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="25">25</option>
+              <option value='5'>5</option>
+              <option value='10'>10</option>
+              <option value='15'>15</option>
+              <option value='20'>20</option>
+              <option value='25'>25</option>
             </CustomSelect>
           </SelectGroup>
         </SelectWrapper>
-        <NewCourse $height={34} $radius={10} $color="grey_6">+</NewCourse>
+        <NewCourse $height={34} $radius={10} $color='grey_6'>
+          +
+        </NewCourse>
 
         <ButtonWrapper>
-          <Button $width={100} $height={20} $fontSize={12} $variant='blue'>만들기</Button>
+          <Button $width={100} $height={20} $fontSize={12} $variant='blue'>
+            만들기
+          </Button>
         </ButtonWrapper>
-  
       </Section>
-    
     </HydrationBoundary>
   );
 }
@@ -69,7 +69,7 @@ const Title = styled.div`
 margin-top: 10px;
   font-size: 12px;
   font-weight: 600;
-`
+`;
 
 const Input = styled.input`
   width:100%;
@@ -85,7 +85,7 @@ const SelectWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   gap:10px;
-`
+`;
 
 const SelectGroup = styled.div`
   display: flex;
@@ -127,4 +127,3 @@ gap:10px;
 margin-top: auto;
 margin-bottom: 20px; 
 `;
-
