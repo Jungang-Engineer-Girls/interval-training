@@ -28,6 +28,9 @@ export default function Home() {
   const handleProfileButton = () => {
     router.push('/profile');
   };
+  const handleLoginButton = () => {
+    router.push('/login');
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -37,6 +40,9 @@ export default function Home() {
         메인 페이지 입니다
         <Button onClick={handleProfileButton} $width={100} $height={20} $fontSize={12} $variant='blue'>
           프로필 만들기
+        </Button>
+        <Button onClick={handleLoginButton} $width={100} $height={20} $fontSize={12} $variant='blue'>
+          로그인 하기
         </Button>
       </main>
     </HydrationBoundary>
