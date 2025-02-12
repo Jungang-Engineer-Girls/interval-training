@@ -23,6 +23,7 @@ const colors = {
   warning: '#fa6b6b',
   blue: '#87A7F8',
   blue_2: '#4A6DBF',
+  orange: '#FFE8B5',
 };
 
 const fontFamily = {
