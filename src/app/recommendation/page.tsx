@@ -26,10 +26,6 @@ export default function Recommendation() {
             { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
             { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
             { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
-            { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
-            { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
-            { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
-            { id: 2, title: '극강의 유산소 코스', time: '45분 소요' },
           ].map((item, index) => ({
             ...item,
             $variant: colors[index % colors.length],
