@@ -14,6 +14,8 @@ export default function MyCourse() {
   const router = useRouter();
   const queryClient = new QueryClient();
 
+  const colors = ['mint_5', 'orange', 'pink', 'gray'];
+
   const onMaking = () => {
     router.push('/making');
   };
@@ -27,9 +29,11 @@ export default function MyCourse() {
           items={[
             { id: 3, title: '오여니 코스', time: '25분 소요' },
             { id: 4, title: '요이땅 코스', time: '30분 소요' },
-          ]}
+          ].map((item, index) => ({
+            ...item,
+            $variant: colors[index % colors.length],
+          }))}
           $fontSize={16}
-          $variant='mint_5'
         />
         <NewCourse onClick={onMaking} $height={80} $radius={20} $color='blue'>
           +
