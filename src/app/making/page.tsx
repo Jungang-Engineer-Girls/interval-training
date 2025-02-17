@@ -8,9 +8,16 @@ import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import Button from '@/shared/components/buttons/button';
 import NewCourse from '@/shared/components/course/newCourse';
+import { useState } from 'react';
 
 export default function Making() {
   const queryClient = new QueryClient();
+
+  const [inputCourse, setInputCourse] = useState('');
+  const handleInputCourse = (e: any) => {
+    setInputCourse(e.target.value);
+    console.log(e.target.value);
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -18,7 +25,7 @@ export default function Making() {
       <TrainingHeader icon={prev.src}>내 코스 만들기</TrainingHeader>
       <Section>
         <Title>코스 이름</Title>
-        <Input />
+        <Input type='text' value={inputCourse} onChange={handleInputCourse} />
         <Title>코스 루틴</Title>
         <SelectWrapper>
           <SelectGroup>
