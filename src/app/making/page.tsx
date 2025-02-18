@@ -14,9 +14,37 @@ export default function Making() {
   const queryClient = new QueryClient();
 
   const [inputCourse, setInputCourse] = useState('');
-  const handleInputCourse = (e: any) => {
+  const [time, setTime] = useState('10');
+  const [speed, setSpeed] = useState('5');
+  const handleInputCourse = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputCourse(e.target.value);
-    console.log(e.target.value);
+  };
+
+  const handleCreateCourse = async () => {
+    const courseData = {
+      title: inputCourse,
+      time: Number(time),
+      speed: Number(speed),
+    };
+
+    try {
+      const response = await fetch('/api/course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(courseData),
+      });
+
+      if (!response.ok) {
+        throw new Error('error');
+      }
+
+      const result = await response.json();
+      console.log('result', result);
+      alert('코스 생성 성공');
+    } catch (error) {
+      console.error('error', error);
+      alert('코스 생성 실패');
+    }
   };
 
   return (
@@ -30,7 +58,7 @@ export default function Making() {
         <SelectWrapper>
           <SelectGroup>
             <Label>분</Label>
-            <CustomSelect>
+            <CustomSelect value={time} onChange={(e) => setTime(e.target.value)}>
               <option value='10'>10분</option>
               <option value='15'>15분</option>
               <option value='20'>20분</option>
@@ -40,7 +68,7 @@ export default function Making() {
           </SelectGroup>
           <SelectGroup>
             <Label>속도</Label>
-            <CustomSelect>
+            <CustomSelect value={speed} onChange={(e) => setSpeed(e.target.value)}>
               <option value='5'>5</option>
               <option value='10'>10</option>
               <option value='15'>15</option>
@@ -54,7 +82,7 @@ export default function Making() {
         </NewCourse>
 
         <ButtonWrapper>
-          <Button $width={100} $height={20} $fontSize={12} $variant='blue'>
+          <Button $width={100} $height={20} $fontSize={12} $variant='blue' onClick={handleCreateCourse} disabled={!inputCourse.trim()}>
             만들기
           </Button>
         </ButtonWrapper>
