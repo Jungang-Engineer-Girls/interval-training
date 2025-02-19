@@ -14,17 +14,24 @@ export default function Making() {
   const queryClient = new QueryClient();
 
   const [inputCourse, setInputCourse] = useState('');
-  const [time, setTime] = useState('10');
-  const [speed, setSpeed] = useState('5');
+  const [routines, setRoutines] = useState([{ time: '10', speed: '5' }]);
+
   const handleInputCourse = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputCourse(e.target.value);
+  };
+
+  const handleNewRoutine = () => {
+    setRoutines([...routines, { time: '10', speed: '5' }]);
+  };
+  const handleRoutineChange = (index: number, field: 'time' | 'speed', value: string) => {
+    const updatedRoutines = routines.map((routine, i) => (i === index ? { ...routine, [field]: value } : routine));
+    setRoutines(updatedRoutines);
   };
 
   const handleCreateCourse = async () => {
     const courseData = {
       title: inputCourse,
-      time: Number(time),
-      speed: Number(speed),
+      routines: routines.map((time, speed) => ({ time: Number(time), speed: Number(speed) })),
     };
 
     try {
@@ -55,29 +62,31 @@ export default function Making() {
         <Title>코스 이름</Title>
         <Input type='text' value={inputCourse} onChange={handleInputCourse} />
         <Title>코스 루틴</Title>
-        <SelectWrapper>
-          <SelectGroup>
-            <Label>분</Label>
-            <CustomSelect value={time} onChange={(e) => setTime(e.target.value)}>
-              <option value='10'>10분</option>
-              <option value='15'>15분</option>
-              <option value='20'>20분</option>
-              <option value='25'>25분</option>
-              <option value='30'>30분</option>
-            </CustomSelect>
-          </SelectGroup>
-          <SelectGroup>
-            <Label>속도</Label>
-            <CustomSelect value={speed} onChange={(e) => setSpeed(e.target.value)}>
-              <option value='5'>5</option>
-              <option value='10'>10</option>
-              <option value='15'>15</option>
-              <option value='20'>20</option>
-              <option value='25'>25</option>
-            </CustomSelect>
-          </SelectGroup>
-        </SelectWrapper>
-        <NewCourse $height={34} $radius={10} $color='grey_6'>
+        {routines.map((routine, index) => (
+          <SelectWrapper key={index}>
+            <SelectGroup>
+              <Label>분</Label>
+              <CustomSelect value={routine.time} onChange={(e) => handleRoutineChange(index, 'time', e.target.value)}>
+                <option value='10'>10분</option>
+                <option value='15'>15분</option>
+                <option value='20'>20분</option>
+                <option value='25'>25분</option>
+                <option value='30'>30분</option>
+              </CustomSelect>
+            </SelectGroup>
+            <SelectGroup>
+              <Label>속도</Label>
+              <CustomSelect value={routine.speed} onChange={(e) => handleRoutineChange(index, 'speed', e.target.value)}>
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='15'>15</option>
+                <option value='20'>20</option>
+                <option value='25'>25</option>
+              </CustomSelect>
+            </SelectGroup>
+          </SelectWrapper>
+        ))}
+        <NewCourse onClick={handleNewRoutine} $height={34} $radius={10} $color='grey_6'>
           +
         </NewCourse>
 
