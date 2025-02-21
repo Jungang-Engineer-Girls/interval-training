@@ -39,7 +39,7 @@ export default function ProfilePage({ style }: LoadingProps) {
         </KakaoLogin>
         <AppleLogin onClick={onAppleLogin}>
           <Image src={apple.src} alt='애플 로그인' width={18} height={18} />
-          애플로 로그인하기기
+          애플로 로그인하기
         </AppleLogin>
       </Section>
     </HydrationBoundary>

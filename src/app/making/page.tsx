@@ -8,9 +8,51 @@ import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import Button from '@/shared/components/buttons/button';
 import NewCourse from '@/shared/components/course/newCourse';
+import { useState } from 'react';
 
 export default function Making() {
   const queryClient = new QueryClient();
+
+  const [inputCourse, setInputCourse] = useState('');
+  const [routines, setRoutines] = useState([{ time: '10', speed: '5' }]);
+
+  const handleInputCourse = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputCourse(e.target.value);
+  };
+
+  const handleNewRoutine = () => {
+    setRoutines([...routines, { time: '10', speed: '5' }]);
+  };
+  const handleRoutineChange = (index: number, field: 'time' | 'speed', value: string) => {
+    const updatedRoutines = routines.map((routine, i) => (i === index ? { ...routine, [field]: value } : routine));
+    setRoutines(updatedRoutines);
+  };
+
+  const handleCreateCourse = async () => {
+    const courseData = {
+      title: inputCourse,
+      routines: routines.map((time, speed) => ({ time: Number(time), speed: Number(speed) })),
+    };
+
+    try {
+      const response = await fetch('/api/course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(courseData),
+      });
+
+      if (!response.ok) {
+        throw new Error('error');
+      }
+
+      const result = await response.json();
+      console.log('result', result);
+      alert('코스 생성 성공');
+    } catch (error) {
+      console.error('error', error);
+      alert('코스 생성 실패');
+    }
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -18,36 +60,38 @@ export default function Making() {
       <TrainingHeader icon={prev.src}>내 코스 만들기</TrainingHeader>
       <Section>
         <Title>코스 이름</Title>
-        <Input />
+        <Input type='text' value={inputCourse} onChange={handleInputCourse} />
         <Title>코스 루틴</Title>
-        <SelectWrapper>
-          <SelectGroup>
-            <Label>분</Label>
-            <CustomSelect>
-              <option value='10'>10분</option>
-              <option value='15'>15분</option>
-              <option value='20'>20분</option>
-              <option value='25'>25분</option>
-              <option value='30'>30분</option>
-            </CustomSelect>
-          </SelectGroup>
-          <SelectGroup>
-            <Label>속도</Label>
-            <CustomSelect>
-              <option value='5'>5</option>
-              <option value='10'>10</option>
-              <option value='15'>15</option>
-              <option value='20'>20</option>
-              <option value='25'>25</option>
-            </CustomSelect>
-          </SelectGroup>
-        </SelectWrapper>
-        <NewCourse $height={34} $radius={10} $color='grey_6'>
+        {routines.map((routine, index) => (
+          <SelectWrapper key={index}>
+            <SelectGroup>
+              <Label>분</Label>
+              <CustomSelect value={routine.time} onChange={(e) => handleRoutineChange(index, 'time', e.target.value)}>
+                <option value='10'>10분</option>
+                <option value='15'>15분</option>
+                <option value='20'>20분</option>
+                <option value='25'>25분</option>
+                <option value='30'>30분</option>
+              </CustomSelect>
+            </SelectGroup>
+            <SelectGroup>
+              <Label>속도</Label>
+              <CustomSelect value={routine.speed} onChange={(e) => handleRoutineChange(index, 'speed', e.target.value)}>
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='15'>15</option>
+                <option value='20'>20</option>
+                <option value='25'>25</option>
+              </CustomSelect>
+            </SelectGroup>
+          </SelectWrapper>
+        ))}
+        <NewCourse onClick={handleNewRoutine} $height={34} $radius={10} $color='grey_6'>
           +
         </NewCourse>
 
         <ButtonWrapper>
-          <Button $width={100} $height={20} $fontSize={12} $variant='blue'>
+          <Button $width={100} $height={20} $fontSize={12} $variant='blue' onClick={handleCreateCourse} disabled={!inputCourse.trim()}>
             만들기
           </Button>
         </ButtonWrapper>
