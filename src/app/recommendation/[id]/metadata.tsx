@@ -10,6 +10,6 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
 
   return {
     title: course.title,
-    description: `${course.title} 내용용`,
+    description: `${course.title} 내용`,
   };
 }
