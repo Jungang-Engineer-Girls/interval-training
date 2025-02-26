@@ -5,6 +5,9 @@ import theme from '@/shared/styles/theme';
 import { useRouter } from 'next/navigation';
 
 import AlarmOutlinedIcon from '@mui/icons-material/AlarmOutlined';
+import DirectionsRunOutlinedIcon from '@mui/icons-material/DirectionsRunOutlined';
+import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
 
 interface CourseListProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   items: { id: number; title: string; time: string; $variant: string }[];
@@ -19,20 +22,24 @@ interface ListBoxProps {
 
 export default function CourseList({ items, $fontSize }: CourseListProps) {
   const router = useRouter();
+  const icons = [AlarmOutlinedIcon, DirectionsRunOutlinedIcon, FitnessCenterOutlinedIcon, SentimentSatisfiedOutlinedIcon];
+
   return (
     <>
-      {items.map((item, index) => (
-        <ListBox $fontSize={$fontSize} $variant={item.$variant} key={index} onClick={() => router.push(`/recommendation/${item.id}`)}>
-          <ListItem>
-            <ListTitle>{item.title}</ListTitle>
-            <Time>{item.time}</Time>
-            {/* <PauseRoundedIcon style={{ fontSize: '30px', color }} /> */}
-            <Icon>
-              <StyledAlarmIcon $variant={item.$variant} />
-            </Icon>
-          </ListItem>
-        </ListBox>
-      ))}
+      {items.map((item, index) => {
+        const RandomIcon = icons[index % icons.length];
+        return (
+          <ListBox $fontSize={$fontSize} $variant={item.$variant} key={index} onClick={() => router.push(`/recommendation/${item.id}`)}>
+            <ListItem>
+              <ListTitle>{item.title}</ListTitle>
+              <Time>{item.time}</Time>
+              <Icon>
+                <RandomIcon style={{ fontSize: 25 }} />
+              </Icon>
+            </ListItem>
+          </ListBox>
+        );
+      })}
     </>
   );
 }
@@ -100,36 +107,4 @@ const Time = styled.div`
 
 const Icon = styled.div`
 align-self: flex-end;
-`;
-
-const StyledAlarmIcon = styled(AlarmOutlinedIcon)<{ $variant: string }>`
-  font-size: 25px;
-  color:${({ $variant }) => {
-    switch ($variant) {
-      case 'primary':
-        return `background-color: ${theme.colors.grey_5}; color: ${theme.colors.white};`;
-      case 'transparent':
-        return `background-color: transparent; color: ${theme.colors.grey_5}; border: 2px solid ${theme.colors.grey_5};`;
-      case 'white':
-        return `background-color: white; color: ${theme.colors.grey_5}; border: 1px solid ${theme.colors.grey_5};`;
-      case 'gray':
-        return `background-color: ${theme.colors.grey_2}; color: ${theme.colors.white}; border: 1px solid ${theme.colors.grey_2};`;
-      case 'black':
-        return `background-color: ${theme.colors.black}; color: ${theme.colors.white}; border: 1px solid ${theme.colors.black};`;
-      case 'mint':
-        return `background-color: ${theme.colors.mint_2}; color: black; border: 1px solid ${theme.colors.mint_2};`;
-      case 'mint_5':
-        return `background-color: ${theme.colors.mint_5}; color: black; border: 1px solid ${theme.colors.mint_5};`;
-      case 'pink':
-        return `background-color: ${theme.colors.pink_2}; color: ${theme.colors.grey_5}; border: 1px solid ${theme.colors.pink_2};`;
-      case 'red':
-        return `background-color: ${theme.colors.warning}; color: ${theme.colors.white}; border: 1px solid ${theme.colors.warning};`;
-      case 'blue':
-        return `background-color: ${theme.colors.blue}; color: ${theme.colors.white}; border: 1px solid ${theme.colors.blue};`;
-      case 'orange':
-        return `background-color: ${theme.colors.orange}; color: ${theme.colors.black}; border: 1px solid ${theme.colors.orange};`;
-      default:
-        return ``;
-    }
-  }}
 `;
