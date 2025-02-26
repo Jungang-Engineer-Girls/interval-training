@@ -4,9 +4,15 @@ import styled from '@emotion/styled';
 import theme from '@/shared/styles/theme';
 import { useRouter } from 'next/navigation';
 
+import AlarmOutlinedIcon from '@mui/icons-material/AlarmOutlined';
+import DirectionsRunOutlinedIcon from '@mui/icons-material/DirectionsRunOutlined';
+import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import SentimentSatisfiedOutlinedIcon from '@mui/icons-material/SentimentSatisfiedOutlined';
+
 interface CourseListProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   items: { id: number; title: string; time: string; $variant: string }[];
   $fontSize: number;
+  // color?: string;
 }
 
 interface ListBoxProps {
@@ -16,16 +22,24 @@ interface ListBoxProps {
 
 export default function CourseList({ items, $fontSize }: CourseListProps) {
   const router = useRouter();
+  const icons = [AlarmOutlinedIcon, DirectionsRunOutlinedIcon, FitnessCenterOutlinedIcon, SentimentSatisfiedOutlinedIcon];
+
   return (
     <>
-      {items.map((item, index) => (
-        <ListBox $fontSize={$fontSize} $variant={item.$variant} key={index} onClick={() => router.push(`/recommendation/${item.id}`)}>
-          <ListItem>
-            <ListTitle>{item.title}</ListTitle>
-            <Time>{item.time}</Time>
-          </ListItem>
-        </ListBox>
-      ))}
+      {items.map((item, index) => {
+        const RandomIcon = icons[index % icons.length];
+        return (
+          <ListBox $fontSize={$fontSize} $variant={item.$variant} key={index} onClick={() => router.push(`/recommendation/${item.id}`)}>
+            <ListItem>
+              <ListTitle>{item.title}</ListTitle>
+              <Time>{item.time}</Time>
+              <Icon>
+                <RandomIcon style={{ fontSize: 25 }} />
+              </Icon>
+            </ListItem>
+          </ListBox>
+        );
+      })}
     </>
   );
 }
@@ -73,7 +87,10 @@ const ListBox = styled.button<ListBoxProps>`
 `;
 
 const ListItem = styled.div`
-  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:100%;
 `;
 const ListTitle = styled.div`
   justify-content: left;
@@ -86,4 +103,8 @@ const Time = styled.div`
   font-weight :400 ;
   color: #87A7F8;
   margin-top: 4px; 
+`;
+
+const Icon = styled.div`
+align-self: flex-end;
 `;
