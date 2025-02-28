@@ -34,11 +34,11 @@ export default function ProfilePage({ style }: LoadingProps) {
       <Section>
         <Lottie animationData={animationData} loop={true} style={{ width: '150px', ...style }} />
         <KakaoLogin onClick={onKakaoLogin}>
-          <Image src={kakao.src} alt='카카오 로그인' width={20} height={20} />
+          <Image src={kakao.src} alt='카카오 로그인' width={18} height={15} />
           카카오로 로그인하기
         </KakaoLogin>
         <AppleLogin onClick={onAppleLogin}>
-          <Image src={apple.src} alt='애플 로그인' width={18} height={18} />
+          <Image src={apple.src} alt='애플 로그인' width={18} height={15} />
           애플로 로그인하기
         </AppleLogin>
       </Section>
@@ -58,6 +58,10 @@ const Section = styled.section`
 `;
 
 const KakaoLogin = styled.button`
+display: flex;  
+align-items: center;  
+justify-content: center;
+gap: 5px; 
 box-sizing: border-box;
 width: 100%;
 height: 38px;
@@ -65,8 +69,13 @@ background-color: #FFE61C;
 border-radius: 10px;
 font-weight: 600;
 font-size: 15px;
+ 
 `;
 const AppleLogin = styled.button`
+display: flex;  
+align-items: center;  
+justify-content: center;
+gap: 5px; 
 box-sizing: border-box;
 width: 100%;
 height: 38px;
