@@ -22,6 +22,7 @@ export default function ProfilePage() {
   //const [registerData, setRegisterData] = useState()
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [nickname, setNickname] = useState('');
 
   const onNext = () => {
     setStep((prev) => (prev + 1 < steps.length ? prev + 1 : prev));
@@ -32,6 +33,11 @@ export default function ProfilePage() {
 
   const onNextStep = () => {
     router.push('/training-start');
+  };
+
+  const onNicknameNext = (name: string) => {
+    setNickname(name);
+    localStorage.setItem('nickname', name);
   };
 
   // const onPrev = () => {
@@ -63,7 +69,7 @@ export default function ProfilePage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <Section>
-        {steps[step] === 'Nickname' && <Nickname onNext={onNext} onSkip={onSkip} />}
+        {steps[step] === 'Nickname' && <Nickname onNext={onNext} onSkip={onSkip} setNickname={onNicknameNext} />}
         {steps[step] === 'BodyInfo' && <BodyInfo onNext={onNext} />}
         {steps[step] === 'BmiResult' && <BmiResult onNext={onNext} />}
         {steps[step] === 'GoalWeight' && (
