@@ -2,12 +2,16 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
+import { useState } from 'react';
 
 type StepProps = {
-  onNext: () => void;
+  onNext: (height: string, weight: string) => void;
 };
 
 export default function BodyInfo({ onNext }: StepProps) {
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+
   return (
     <>
       <Header>
@@ -16,16 +20,16 @@ export default function BodyInfo({ onNext }: StepProps) {
       </Header>
       <InputWrapper>
         <div>
-          <Input />
+          <Input value={height} onChange={(e) => setHeight(e.target.value)} />
           cm
         </div>
         <div>
-          <Input />
+          <Input value={weight} onChange={(e) => setWeight(e.target.value)} />
           kg
         </div>
       </InputWrapper>
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
+        <Button onClick={() => onNext(height, weight)} $width={100} $height={20} $fontSize={12} $variant='blue'>
           등록하기
         </Button>
       </ButtonWrapper>
