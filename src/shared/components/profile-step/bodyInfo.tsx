@@ -11,6 +11,15 @@ type StepProps = {
 export default function BodyInfo({ onNext }: StepProps) {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) setHeight(value);
+  };
+
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) setWeight(value);
+  };
 
   return (
     <>
@@ -20,11 +29,11 @@ export default function BodyInfo({ onNext }: StepProps) {
       </Header>
       <InputWrapper>
         <div>
-          <Input value={height} onChange={(e) => setHeight(e.target.value)} />
+          <Input type='number' value={height} onChange={handleHeightChange} placeholder='키' />
           cm
         </div>
         <div>
-          <Input value={weight} onChange={(e) => setWeight(e.target.value)} />
+          <Input type='number' value={weight} onChange={handleWeightChange} placeholder='몸무게' />
           kg
         </div>
       </InputWrapper>
