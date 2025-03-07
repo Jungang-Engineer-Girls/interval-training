@@ -1,13 +1,20 @@
 'use client';
 import styled from '@emotion/styled';
-
 import Button from '@/shared/components/buttons/button';
+import { useState } from 'react';
 
 type StepProps = {
-  onNext: (data: any) => void;
+  onNext: (weight: string) => void;
 };
 
 export default function GoalWeight({ onNext }: StepProps) {
+  const [goalWeight, setGoalWeight] = useState('');
+
+  const handleGoalWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) setGoalWeight(value);
+  };
+
   return (
     <>
       <Header>
@@ -16,13 +23,13 @@ export default function GoalWeight({ onNext }: StepProps) {
       </Header>
       <InputWrapper>
         <div>
-          <Input />
+          <Input type='number' value={goalWeight} onChange={handleGoalWeightChange} placeholder='목표 체중 입력력' />
           kg
         </div>
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
+        <Button onClick={() => onNext(goalWeight)} $width={100} $height={20} $fontSize={12} $variant='blue'>
           등록하기
         </Button>
       </ButtonWrapper>

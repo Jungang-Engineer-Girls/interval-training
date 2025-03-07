@@ -16,14 +16,18 @@ export default function MyPage() {
   const [nickname, setNickname] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const [goalWeight, setGoalWeight] = useState('');
 
   useEffect(() => {
     const storedNickname = localStorage.getItem('nickname');
     const storedHeight = localStorage.getItem('height');
     const storedWeight = localStorage.getItem('weight');
+    const storedGoalWeight = localStorage.getItem('goalWeight');
+
     if (storedNickname) setNickname(storedNickname);
     if (storedHeight) setHeight(storedHeight);
     if (storedWeight) setWeight(storedWeight);
+    if (storedGoalWeight) setGoalWeight(storedGoalWeight);
   }, []);
 
   return (
@@ -33,7 +37,8 @@ export default function MyPage() {
       <Section>
         <Text>닉네임: {nickname || '닉네임 입력'}</Text>
         <Text>키: {height ? `${height} cm` : '키 입력'}</Text>
-        <Text>몸무게: {weight ? `${weight} kg` : '몸무게 입력'}</Text>
+        <Text>체중중: {weight ? `${weight} kg` : '체중 입력'}</Text>
+        <Text>목표 체중: {goalWeight ? `${goalWeight} kg` : '목표 체중 입력'}</Text>
       </Section>
     </HydrationBoundary>
   );

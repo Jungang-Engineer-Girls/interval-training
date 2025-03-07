@@ -25,6 +25,7 @@ export default function ProfilePage() {
   const [nickname, setNickname] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const [goalWeight, setGoalWeight] = useState('');
 
   const onNext = () => {
     setStep((prev) => (prev + 1 < steps.length ? prev + 1 : prev));
@@ -46,6 +47,12 @@ export default function ProfilePage() {
     setWeight(weight);
     localStorage.setItem('height', height);
     localStorage.setItem('weight', weight);
+    onNext();
+  };
+
+  const onGoalWeightNext = (goalWeight: string) => {
+    setGoalWeight(goalWeight);
+    localStorage.setItem('goalWeight', goalWeight);
     onNext();
   };
   // const onPrev = () => {
@@ -82,7 +89,7 @@ export default function ProfilePage() {
         {steps[step] === 'BmiResult' && <BmiResult onNext={onNext} />}
         {steps[step] === 'GoalWeight' && (
           <GoalWeight
-            onNext={(data: any) => handleGoalWeightNext(data)} // API 호출
+            onNext={onGoalWeightNext} // API 호출
           />
         )}
         {steps[step] === 'Start' && <Start onNextStep={onNextStep} />}

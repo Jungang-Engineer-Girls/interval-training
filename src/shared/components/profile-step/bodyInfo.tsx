@@ -33,7 +33,7 @@ export default function BodyInfo({ onNext }: StepProps) {
           cm
         </div>
         <div>
-          <Input type='number' value={weight} onChange={handleWeightChange} placeholder='몸무게' />
+          <Input type='number' value={weight} onChange={handleWeightChange} placeholder='체중중' />
           kg
         </div>
       </InputWrapper>
