@@ -37,7 +37,7 @@ export default function MyPage() {
       <Section>
         <Text>닉네임: {nickname || '닉네임 입력'}</Text>
         <Text>키: {height ? `${height} cm` : '키 입력'}</Text>
-        <Text>체중중: {weight ? `${weight} kg` : '체중 입력'}</Text>
+        <Text>체중: {weight ? `${weight} kg` : '체중 입력'}</Text>
         <Text>목표 체중: {goalWeight ? `${goalWeight} kg` : '목표 체중 입력'}</Text>
       </Section>
     </HydrationBoundary>

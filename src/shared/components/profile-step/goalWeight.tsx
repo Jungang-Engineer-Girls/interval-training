@@ -23,7 +23,7 @@ export default function GoalWeight({ onNext }: StepProps) {
       </Header>
       <InputWrapper>
         <div>
-          <Input type='number' value={goalWeight} onChange={handleGoalWeightChange} placeholder='목표 체중 입력력' />
+          <Input type='number' value={goalWeight} onChange={handleGoalWeightChange} placeholder='목표 체중' />
           kg
         </div>
       </InputWrapper>
