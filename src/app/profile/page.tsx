@@ -22,6 +22,10 @@ export default function ProfilePage() {
   //const [registerData, setRegisterData] = useState()
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [goalWeight, setGoalWeight] = useState('');
 
   const onNext = () => {
     setStep((prev) => (prev + 1 < steps.length ? prev + 1 : prev));
@@ -34,6 +38,23 @@ export default function ProfilePage() {
     router.push('/training-start');
   };
 
+  const onNicknameNext = (name: string) => {
+    setNickname(name);
+    localStorage.setItem('nickname', name);
+  };
+  const onBodyInfoNext = (height: string, weight: string) => {
+    setHeight(height);
+    setWeight(weight);
+    localStorage.setItem('height', height);
+    localStorage.setItem('weight', weight);
+    onNext();
+  };
+
+  const onGoalWeightNext = (goalWeight: string) => {
+    setGoalWeight(goalWeight);
+    localStorage.setItem('goalWeight', goalWeight);
+    onNext();
+  };
   // const onPrev = () => {
   //   setStep((prev) => prev - 1);
   // };
@@ -63,12 +84,12 @@ export default function ProfilePage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
       <Section>
-        {steps[step] === 'Nickname' && <Nickname onNext={onNext} onSkip={onSkip} />}
-        {steps[step] === 'BodyInfo' && <BodyInfo onNext={onNext} />}
+        {steps[step] === 'Nickname' && <Nickname onNext={onNext} onSkip={onSkip} setNickname={onNicknameNext} />}
+        {steps[step] === 'BodyInfo' && <BodyInfo onNext={onBodyInfoNext} />}
         {steps[step] === 'BmiResult' && <BmiResult onNext={onNext} />}
         {steps[step] === 'GoalWeight' && (
           <GoalWeight
-            onNext={(data: any) => handleGoalWeightNext(data)} // API 호출
+            onNext={onGoalWeightNext} // API 호출
           />
         )}
         {steps[step] === 'Start' && <Start onNextStep={onNextStep} />}

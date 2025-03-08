@@ -2,12 +2,25 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
+import { useState } from 'react';
 
 type StepProps = {
-  onNext: () => void;
+  onNext: (height: string, weight: string) => void;
 };
 
 export default function BodyInfo({ onNext }: StepProps) {
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) setHeight(value);
+  };
+
+  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) setWeight(value);
+  };
+
   return (
     <>
       <Header>
@@ -16,16 +29,16 @@ export default function BodyInfo({ onNext }: StepProps) {
       </Header>
       <InputWrapper>
         <div>
-          <Input />
+          <Input type='number' value={height} onChange={handleHeightChange} placeholder='키' />
           cm
         </div>
         <div>
-          <Input />
+          <Input type='number' value={weight} onChange={handleWeightChange} placeholder='체중중' />
           kg
         </div>
       </InputWrapper>
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>
+        <Button onClick={() => onNext(height, weight)} $width={100} $height={20} $fontSize={12} $variant='blue'>
           등록하기
         </Button>
       </ButtonWrapper>

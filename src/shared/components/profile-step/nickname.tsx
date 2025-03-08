@@ -2,23 +2,32 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
+import { useState } from 'react';
 
 type StepProps = {
   onNext: () => void;
   onSkip: () => void;
+  setNickname: (name: string) => void;
 };
 
-export default function Nickname({ onNext, onSkip }: StepProps) {
+export default function Nickname({ onNext, onSkip, setNickname }: StepProps) {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleRegister = () => {
+    setNickname(inputValue);
+    onNext();
+  };
+
   return (
     <>
       <Header>
         <div>회원님의 </div>
         <div>닉네임을 알려주세요</div>
       </Header>
-      <Input />
+      <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
 
       <ButtonWrapper>
-        <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='mint'>
+        <Button onClick={handleRegister} $width={100} $height={20} $fontSize={12} $variant='mint'>
           등록하기
         </Button>
         <Button onClick={onSkip} $width={100} $height={20} $fontSize={12} $variant='blue'>
