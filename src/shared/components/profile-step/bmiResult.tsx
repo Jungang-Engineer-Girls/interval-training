@@ -2,16 +2,24 @@
 import styled from '@emotion/styled';
 
 import Button from '@/shared/components/buttons/button';
+import { useEffect, useState } from 'react';
 
 type StepProps = {
   onNext: () => void;
 };
 
 export default function BmiResult({ onNext }: StepProps) {
+  const [nickname, setNickname] = useState('');
+
+  useEffect(() => {
+    const storedNickname = localStorage.getItem('nickname');
+    if (storedNickname) setNickname(storedNickname);
+  }, []);
+
   return (
     <>
       <Header>
-        <div>오연님의 BMI 수치를 </div>
+        <div>{nickname || '사용자'}님의 BMI 수치를 </div>
         <div>분석한 결과</div>
         <div>
           현재 <Bmi>저체중</Bmi>입니다
