@@ -8,6 +8,9 @@ import TrainingHeader from '@/shared/components/header/trainingHeader';
 import prev from '@/shared/assets/icons/prev.svg';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { ApexOptions } from 'apexcharts';
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function MyPage() {
   const router = useRouter();
@@ -43,6 +46,43 @@ export default function MyPage() {
     return '비만';
   };
 
+  const chartData = {
+    series: [
+      {
+        name: '체중 변화',
+        data: [60, 61, 62, 64, 65, 67, 68, 70, 72],
+      },
+    ],
+    options: {
+      chart: {
+        height: 350,
+        type: 'line' as const,
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      title: {
+        text: '체중 변화 그래프',
+        align: 'left',
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'],
+          opacity: 0.5,
+        },
+      },
+      xaxis: {
+        categories: ['1주', '2주', '3주', '4주', '5주', '6주', '7주', '8주', '9주'],
+      },
+    } as ApexOptions,
+  };
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
@@ -56,6 +96,7 @@ export default function MyPage() {
         </Text>
         <Text>목표 체중: {goalWeight ? `${goalWeight} kg` : '목표 체중 입력'}</Text>
         <Text>체중 그래프</Text>
+        <ReactApexChart options={chartData.options} series={chartData.series} type='line' height={350} />
       </Section>
     </HydrationBoundary>
   );
