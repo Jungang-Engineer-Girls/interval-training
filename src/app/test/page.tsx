@@ -15,15 +15,27 @@ export default function TestPage() {
   const queryClient = new QueryClient();
   const [courseData, setCourseData] = useState(null);
   const [testData, setTestData] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      const { data: user, error: userError } = await supabase
+        .from("user")
+        .select("*");
+
       const { data: courses, error: courseError } = await supabase
         .from("course")
         .select("*");
-      const { data: tests, error: testError } = await supabase
-        .from("test")
-        .select("*");
+
+      // const { data: tests, error: testError } = await supabase
+      //   .from("test")
+      //   .select("*");
+
+      if (userError) {
+        console.error("User data fetch error:", userError);
+      } else {
+        setUserData(user);
+      }
 
       if (courseError) {
         console.error("Course data fetch error:", courseError);
@@ -31,11 +43,11 @@ export default function TestPage() {
         setCourseData(courses);
       }
 
-      if (testError) {
-        console.error("Test data fetch error:", testError);
-      } else {
-        setTestData(tests);
-      }
+      // if (testError) {
+      //   console.error("Test data fetch error:", testError);
+      // } else {
+      //   setTestData(tests);
+      // }
     };
     fetchData();
   }, []);
@@ -44,6 +56,7 @@ export default function TestPage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <section>
         <div>test page</div>
+        <pre>{JSON.stringify(userData, null, 2)}</pre>
         <pre>{JSON.stringify(courseData, null, 2)}</pre>
         <pre>{JSON.stringify(testData, null, 2)}</pre>
       </section>
