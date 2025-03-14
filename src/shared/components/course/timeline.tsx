@@ -1,6 +1,6 @@
-'use client';
-import styled from '@emotion/styled';
-import { useState, useEffect } from 'react';
+"use client";
+import styled from "@emotion/styled";
+import { useState, useEffect } from "react";
 
 interface TimelineProps {
   items: { text: string; duration: number }[];
@@ -21,6 +21,7 @@ export default function Timeline({ items, currentTime }: TimelineProps) {
       }
     }
   }, [currentTime, items]);
+
   return (
     <Container>
       {items.map((item, index) => (
@@ -49,7 +50,7 @@ const CircleTime = styled.span<{ playing: boolean }>`
   box-sizing: border-box;
   width: 10px;
   height: 10px;
-  background-color: ${({ playing }) => (playing ? '#87A7F8' : '#D9D9D9')};
+  background-color: ${({ playing }) => (playing ? "#87A7F8" : "#D9D9D9")};
   border-radius: 100%;
 `;
 

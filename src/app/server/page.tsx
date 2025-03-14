@@ -15,8 +15,6 @@ export default function Server() {
     fetchUser();
   }, []);
 
-  console.log(user);
-
   return (
     <div>
       <h1>Server Test Page</h1>

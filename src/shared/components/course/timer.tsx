@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import PauseRoundedIcon from '@mui/icons-material/PauseRounded';
-import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
+import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import PauseRoundedIcon from "@mui/icons-material/PauseRounded";
+import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 
 interface TimerProps {
   duration: number;
@@ -19,10 +19,18 @@ interface TimerProps {
 const formatTime = (seconds: number) => {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
-  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 };
 
-export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWidth, color = '#87A7F8', backgroundColor = '#D9D9D9' }: TimerProps) {
+export default function Timer({
+  duration,
+  radius,
+  thinStrokeWidth,
+  thickStrokeWidth,
+  color = "#87A7F8",
+  backgroundColor = "#D9D9D9",
+}: TimerProps) {
   const totalSeconds = duration * 60;
   const [remainingTime, setRemainingTime] = useState(totalSeconds);
   const [play, setPlay] = useState(false);
@@ -59,22 +67,33 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
   return (
     <>
       <Container>
-        <svg width={radius * 2 + thickStrokeWidth} height={radius * 2 + thickStrokeWidth} viewBox={`0 0 ${radius * 2 + thickStrokeWidth} ${radius * 2 + thickStrokeWidth}`}>
-          <circle cx={radius + thickStrokeWidth / 2} cy={radius + thickStrokeWidth / 2} r={radius} stroke={backgroundColor} strokeWidth={thinStrokeWidth} fill='none' />
+        <svg
+          width={radius * 2 + thickStrokeWidth}
+          height={radius * 2 + thickStrokeWidth}
+          viewBox={`0 0 ${radius * 2 + thickStrokeWidth} ${radius * 2 + thickStrokeWidth}`}
+        >
+          <circle
+            cx={radius + thickStrokeWidth / 2}
+            cy={radius + thickStrokeWidth / 2}
+            r={radius}
+            stroke={backgroundColor}
+            strokeWidth={thinStrokeWidth}
+            fill="none"
+          />
           <circle
             cx={radius + thickStrokeWidth / 2}
             cy={radius + thickStrokeWidth / 2}
             r={radius}
             stroke={color}
             strokeWidth={thickStrokeWidth}
-            fill='none'
+            fill="none"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
-            strokeLinecap='round'
+            strokeLinecap="round"
             style={{
-              transform: 'rotate(-90deg)',
-              transformOrigin: 'center',
-              transition: 'stroke-dashoffset 0.1s linear',
+              transform: "rotate(-90deg)",
+              transformOrigin: "center",
+              transition: "stroke-dashoffset 0.1s linear",
             }}
           />
         </svg>
@@ -84,17 +103,17 @@ export default function Timer({ duration, radius, thinStrokeWidth, thickStrokeWi
         <PlayerContainer onClick={onPlay}>
           {play ? (
             <PlayerTransparentCircle color={color}>
-              <PauseRoundedIcon style={{ fontSize: '30px', color }} />
+              <PauseRoundedIcon style={{ fontSize: "30px", color }} />
             </PlayerTransparentCircle>
           ) : (
             <PlayerCircle>
-              <PlayArrowRoundedIcon style={{ fontSize: '30px', color }} />
+              <PlayArrowRoundedIcon style={{ fontSize: "30px", color }} />
             </PlayerCircle>
           )}
         </PlayerContainer>
         <PlayerContainer>
           <PlayerTransparentCircle onClick={onReset} color={color}>
-            <ReplayRoundedIcon style={{ fontSize: '30px', color }} />
+            <ReplayRoundedIcon style={{ fontSize: "30px", color }} />
           </PlayerTransparentCircle>
         </PlayerContainer>
       </PlayerBox>
@@ -130,18 +149,18 @@ const PlayerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px; 
-  height: 100%; 
-  position: relative; 
+  width: 60px;
+  height: 100%;
+  position: relative;
 `;
 
 const PlayerCircle = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px; 
+  width: 45px;
   height: 45px;
-  background-color: #E1EAFF;
+  background-color: #e1eaff;
   border-radius: 100%;
 `;
 
@@ -149,14 +168,14 @@ const PlayerTransparentCircle = styled.span<{ color: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px; 
+  width: 45px;
   height: 45px;
   border-radius: 100%;
-  border:1px solid ${({ color }) => color};
+  border: 1px solid ${({ color }) => color};
 `;
 
 const DashedLine = styled.div`
   width: 100%;
-  border-bottom: 1px dashed #D9D9D9;
+  border-bottom: 1px dashed #d9d9d9;
   margin: 20px 0;
 `;

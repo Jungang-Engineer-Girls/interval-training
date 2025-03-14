@@ -16,12 +16,9 @@ import Lottie from "lottie-react";
 import animationData from "@/shared/assets/icons/loading.json";
 import kakao from "@/shared/assets/icons/kakao.svg";
 import apple from "@/shared/assets/icons/apple.svg";
+import { useEffect } from "react";
 
-type LoadingProps = {
-  style?: React.CSSProperties;
-};
-
-export default function ProfilePage({ style }: LoadingProps) {
+export default function ProfilePage({ style }: any) {
   const router = useRouter();
   const queryClient = new QueryClient();
 
@@ -32,12 +29,23 @@ export default function ProfilePage({ style }: LoadingProps) {
         redirectTo: `https://whladkmzmbkzbdhjlhvc.supabase.co/auth/v1/callback`,
       },
     });
-    console.log(data);
-    console.error(error);
+
+    alert(data);
+    if (error) {
+      alert(error.message);
+    }
   };
+
   const onAppleLogin = () => {
     router.push("/apple");
   };
+
+  useEffect(() => {
+    // 클라이언트에서만 document를 사용할 수 있도록 함
+    if (typeof document !== "undefined") {
+      // document 관련 코드
+    }
+  }, []);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

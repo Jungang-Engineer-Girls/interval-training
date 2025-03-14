@@ -1,28 +1,56 @@
-'use client';
-import styled from '@emotion/styled';
+"use client";
 
-import theme from '@/shared/styles/theme';
+import Image from "next/image";
+import styled from "@emotion/styled";
+import theme from "@/shared/styles/theme";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   $width: number;
   $height: number;
   $fontSize: number;
-  $variant: 'primary' | 'transparent' | 'white' | 'gray' | 'black' | 'mint' | 'pink' | 'red' | 'blue' | 'blue_2';
+  $variant:
+    | "primary"
+    | "transparent"
+    | "white"
+    | "gray"
+    | "black"
+    | "mint"
+    | "pink"
+    | "red"
+    | "blue"
+    | "blue_2";
   icon?: string;
   iconBgColor?: string;
   iconSize?: number;
-  direction?: 'row' | 'column';
+  direction?: "row" | "column";
   children?: React.ReactNode;
 }
 
-export default function CourseBox({ $width, $height, $fontSize, $variant, icon, iconBgColor, iconSize = 24, direction = 'row', children, ...rest }: Props) {
+export default function CourseBox({
+  $width,
+  $height,
+  $fontSize,
+  $variant,
+  icon,
+  iconBgColor,
+  iconSize = 24,
+  direction = "row",
+  children,
+  ...rest
+}: Props) {
   return (
     <>
-      <Box $width={$width} $height={$height} $fontSize={$fontSize} $variant={$variant} {...rest}>
+      <Box
+        $width={$width}
+        $height={$height}
+        $fontSize={$fontSize}
+        $variant={$variant}
+        {...rest}
+      >
         <ContentWrapper $direction={direction}>
           {icon && (
             <IconWrapper $iconBgColor={iconBgColor} $iconSize={iconSize}>
-              <img src={icon} alt='Icon' />
+              <Image src={icon} alt="Icon" width={100} height={100} />
             </IconWrapper>
           )}
           <span>{children}</span>
@@ -38,72 +66,72 @@ const Box = styled.button<Props>`
   width: ${({ $width }) => `clamp(fit-content, $width, ${$width});`};
   height: height;
   padding: 12px 24px;
-  border-radius:20px;
+  border-radius: 20px;
 
   font-family: NanumSquareNeo-Bold, sans-serif;
   font-size: ${({ $fontSize }) => `clamp(8px, ${$fontSize}px, ${$fontSize}px)`};
-    font-weight: 600;
+  font-weight: 600;
 
   border: none;
 
   ${({ $variant }) => {
     switch ($variant) {
-      case 'primary': {
+      case "primary": {
         return `
           background-color: ${theme.colors.grey_5};
           color: ${theme.colors.white};
         `;
       }
-      case 'transparent': {
+      case "transparent": {
         return `
           background-color: transparent;
           color: ${theme.colors.grey_5};
           border: 2px solid ${theme.colors.grey_5};
         `;
       }
-      case 'white': {
+      case "white": {
         return `
           background-color: white;
           color: ${theme.colors.grey_5};
           border: 1px solid ${theme.colors.grey_5};
         `;
       }
-      case 'gray': {
+      case "gray": {
         return `
           background-color: ${theme.colors.grey_2};
           color: ${theme.colors.white};
           border: 1px solid ${theme.colors.grey_2};
         `;
       }
-      case 'black': {
+      case "black": {
         return `
           background-color: ${theme.colors.black};
           color: ${theme.colors.white};
           border: 1px solid ${theme.colors.black};
         `;
       }
-      case 'mint': {
+      case "mint": {
         return `
           background-color: ${theme.colors.mint_2};
           color: 'black';
           border: 1px solid ${theme.colors.mint_2};
         `;
       }
-      case 'pink': {
+      case "pink": {
         return `
           background-color: ${theme.colors.pink_2};
           color: ${theme.colors.grey_5};
           border: 1px solid ${theme.colors.pink_2};
         `;
       }
-      case 'red': {
+      case "red": {
         return `
           background-color: ${theme.colors.warning};
           color: ${theme.colors.white};
           border: 1px solid ${theme.colors.warning};
         `;
       }
-      case 'blue': {
+      case "blue": {
         return `
           background-color: ${theme.colors.blue};
           color: ${theme.colors.white};
@@ -118,23 +146,23 @@ const Box = styled.button<Props>`
   }}
 `;
 
-const ContentWrapper = styled.div<{ $direction: 'row' | 'column' }>`
+const ContentWrapper = styled.div<{ $direction: "row" | "column" }>`
   display: flex;
   flex-direction: ${({ $direction }) => $direction};
-  align-items: center; 
+  align-items: center;
 `;
 
 const IconWrapper = styled.span<{ $iconBgColor?: string; $iconSize?: number }>`
   width: ${({ $iconSize }) => `${$iconSize}px`};
   height: ${({ $iconSize }) => `${$iconSize}px`};
-  border-radius: 50%; 
-  background-color: ${({ $iconBgColor }) => $iconBgColor || 'white'}; 
+  border-radius: 50%;
+  background-color: ${({ $iconBgColor }) => $iconBgColor || "white"};
   display: flex;
   justify-content: center;
   align-items: center;
 
   img {
-    width: 70%; 
+    width: 70%;
     height: 70%;
   }
 `;
