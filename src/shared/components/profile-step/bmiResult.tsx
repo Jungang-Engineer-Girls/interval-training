@@ -4,9 +4,14 @@ import styled from '@emotion/styled';
 import Button from '@/shared/components/buttons/button';
 import { useEffect, useState } from 'react';
 
+import dynamic from 'next/dynamic';
+import { ApexOptions } from 'apexcharts';
+
 type StepProps = {
   onNext: () => void;
 };
+
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 export default function BmiResult({ onNext }: StepProps) {
   const [nickname, setNickname] = useState('');
@@ -15,6 +20,33 @@ export default function BmiResult({ onNext }: StepProps) {
     const storedNickname = localStorage.getItem('nickname');
     if (storedNickname) setNickname(storedNickname);
   }, []);
+  const chartData: { series: ApexAxisChartSeries; options: ApexOptions } = {
+    series: [
+      {
+        name: '체중 변화',
+        data: [60, 61, 62, 64, 65, 67, 68, 70, 72], // 예제 데이터
+      },
+    ],
+    options: {
+      chart: {
+        height: 350,
+        type: 'line',
+        zoom: { enabled: false },
+      },
+      dataLabels: { enabled: false },
+      stroke: { curve: 'smooth' },
+      title: { text: '체중 변화 그래프', align: 'left' },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'],
+          opacity: 0.5,
+        },
+      },
+      xaxis: {
+        categories: ['1주', '2주', '3주', '4주', '5주', '6주', '7주', '8주', '9주'],
+      },
+    },
+  };
 
   return (
     <>
@@ -26,6 +58,7 @@ export default function BmiResult({ onNext }: StepProps) {
         </div>
       </Header>
       <div>체중 그래프</div>
+      <ReactApexChart options={chartData.options} series={chartData.series} type='line' height={350} />
 
       <ButtonWrapper>
         <Button onClick={onNext} $width={100} $height={20} $fontSize={12} $variant='blue'>

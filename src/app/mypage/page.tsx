@@ -46,31 +46,22 @@ export default function MyPage() {
     return '비만';
   };
 
-  const chartData = {
+  const chartData: { series: ApexAxisChartSeries; options: ApexOptions } = {
     series: [
       {
         name: '체중 변화',
-        data: [60, 61, 62, 64, 65, 67, 68, 70, 72],
+        data: [60, 61, 62, 64, 65, 67, 68, 70, 72], // 예제 데이터
       },
     ],
     options: {
       chart: {
         height: 350,
-        type: 'line' as const,
-        zoom: {
-          enabled: false,
-        },
+        type: 'line',
+        zoom: { enabled: false },
       },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      title: {
-        text: '체중 변화 그래프',
-        align: 'left',
-      },
+      dataLabels: { enabled: false },
+      stroke: { curve: 'smooth' },
+      title: { text: '체중 변화 그래프', align: 'left' },
       grid: {
         row: {
           colors: ['#f3f3f3', 'transparent'],
@@ -80,9 +71,8 @@ export default function MyPage() {
       xaxis: {
         categories: ['1주', '2주', '3주', '4주', '5주', '6주', '7주', '8주', '9주'],
       },
-    } as ApexOptions,
+    },
   };
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Global styles={globalStyles} />
