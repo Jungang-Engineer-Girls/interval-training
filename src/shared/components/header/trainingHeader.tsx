@@ -1,6 +1,7 @@
-'use client';
-import styled from '@emotion/styled';
-import { useRouter } from 'next/navigation';
+"use client";
+import Image from "next/image";
+import styled from "@emotion/styled";
+import { useRouter } from "next/navigation";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: string;
@@ -13,11 +14,12 @@ export default function TrainingHeader({ icon, children }: Props) {
   const onPrev = () => {
     router.back();
   };
+
   return (
     <Header>
       {icon && (
         <IconWrapper onClick={onPrev}>
-          <img src={icon} alt='prev' />
+          <Image src={icon} alt="prev" width={100} height={100} />
         </IconWrapper>
       )}
       <Title>{children}</Title>
@@ -36,12 +38,12 @@ const Header = styled.div`
 `;
 const IconWrapper = styled.div`
   position: absolute;
-  left: 16px; 
+  left: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10px;  
-  height: 20px; 
+  width: 10px;
+  height: 20px;
   cursor: pointer;
 
   img {
@@ -51,7 +53,7 @@ const IconWrapper = styled.div`
 `;
 
 const Title = styled.span`
-  font-size: 12px; 
+  font-size: 12px;
   font-weight: bold;
-  text-align: center; 
+  text-align: center;
 `;

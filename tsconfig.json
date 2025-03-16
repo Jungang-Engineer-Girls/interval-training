@@ -9,6 +9,9 @@
     "skipLibCheck": true,
     "noEmit": true,
 
+    "noImplicitAny": false,
+    "ignoreDeprecations": "5.0",
+
     /* Bundler mode */
     "module": "esnext",
 
